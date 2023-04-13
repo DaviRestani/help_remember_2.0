@@ -22,29 +22,9 @@ List _dataDummy = [
   },
 ];
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class GroupListFood extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: GroupList(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class GroupList extends StatefulWidget {
-  @override
-  State<GroupList> createState() => _GroupListState();
+  State<GroupListFood> createState() => _GroupListFoodState();
 }
 
 class _DemoBottomAppBar extends StatelessWidget {
@@ -94,7 +74,7 @@ class _DemoBottomAppBar extends StatelessWidget {
   }
 }
 
-class _GroupListState extends State<GroupList> {
+class _GroupListFoodState extends State<GroupListFood> {
   bool _showFab = true;
   bool _showNotch = true;
   FloatingActionButtonLocation _fabLocation =
@@ -104,17 +84,19 @@ class _GroupListState extends State<GroupList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Center(
-            child: new Text("Dietas",
+        title: const Center(
+            child: Text("Dietas",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Inknut Antiqua',
                 ))),
-        leading: new IconButton(
-          icon: new Icon(Icons.arrow_back),
-          onPressed: () {},
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
       body: GroupedListView<dynamic, String>(

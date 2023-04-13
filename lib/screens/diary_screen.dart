@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 
-List _dataDummy = [
+List _dataDummyDiary = [
   {
     "albumId": 1,
     "id": 1,
@@ -26,29 +26,9 @@ List _dataDummy = [
   },
 ];
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class GroupListDiary extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: GroupList(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class GroupList extends StatefulWidget {
-  @override
-  State<GroupList> createState() => _GroupListState();
+  State<GroupListDiary> createState() => _GroupListDiaryState();
 }
 
 class _DemoBottomAppBar extends StatelessWidget {
@@ -98,45 +78,47 @@ class _DemoBottomAppBar extends StatelessWidget {
   }
 }
 
-class _GroupListState extends State<GroupList> {
-  bool _showFab = true;
-  bool _showNotch = true;
-  FloatingActionButtonLocation _fabLocation =
+class _GroupListDiaryState extends State<GroupListDiary> {
+  final bool _showFab = true;
+  final bool _showNotch = true;
+  final FloatingActionButtonLocation _fabLocation =
       FloatingActionButtonLocation.centerDocked;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Center(
-            child: new Text("Diário",
+        title: const Center(
+            child: Text("Diário",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Inknut Antiqua',
                 ))),
-        leading: new IconButton(
-          icon: new Icon(Icons.arrow_back),
-          onPressed: () {},
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
       body: GroupedListView<dynamic, String>(
-        elements: _dataDummy, //Banco de Dados --------------------------
+        elements: _dataDummyDiary, //Banco de Dados --------------------------
         groupBy: (element) => element['tipo'],
         groupSeparatorBuilder: (String groupByValue) => Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Row(
             children: [
               Flexible(
                   child: Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 10, right: 10),
+                    margin: const EdgeInsets.only(left: 10, right: 10),
                     child: Text(
                       groupByValue,
                       textAlign: TextAlign.start,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Inknut Antiqua',

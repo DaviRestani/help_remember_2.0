@@ -2,14 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../utilities/constants.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: CadastroScreen(),
-    ),
-  );
-}
-
 class CadastroScreen extends StatefulWidget {
   @override
   _CadastroScreenState createState() => _CadastroScreenState();

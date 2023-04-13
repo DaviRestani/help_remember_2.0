@@ -1,0 +1,10 @@
+^D:\DESKTOP\HELP_REMEMBER_2.0-MAIN\BUILD\WINDOWS\CMAKEFILES\B67F906EC53E4EE7EE9B8AB1CF029290\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/Desktop/help_remember_2.0-main/windows -BD:/Desktop/help_remember_2.0-main/build/windows --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Desktop/help_remember_2.0-main/build/windows/help_remember.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 
-List _dataDummy = [
+List _dataDummyFamily = [
   {
     "albumId": 1,
     "id": 1,
@@ -40,29 +40,9 @@ List _dataDummy = [
   },
 ];
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class GroupListFamily extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: GroupList(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class GroupList extends StatefulWidget {
-  @override
-  State<GroupList> createState() => _GroupListState();
+  State<GroupListFamily> createState() => _GroupListFamilyState();
 }
 
 class _DemoBottomAppBar extends StatelessWidget {
@@ -112,7 +92,7 @@ class _DemoBottomAppBar extends StatelessWidget {
   }
 }
 
-class _GroupListState extends State<GroupList> {
+class _GroupListFamilyState extends State<GroupListFamily> {
   bool _showFab = true;
   bool _showNotch = true;
   FloatingActionButtonLocation _fabLocation =
@@ -123,20 +103,22 @@ class _GroupListState extends State<GroupList> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-            child:  Text("Entes Queridos",
+            child: Text("Entes Queridos",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Inknut Antiqua',
                 ))),
-        leading:  IconButton(
-          icon:  const Icon(Icons.arrow_back),
-          onPressed: () {},
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
       body: GroupedListView<dynamic, String>(
-        elements: _dataDummy, //Banco de Dados --------------------------
+        elements: _dataDummyFamily, //Banco de Dados --------------------------
         groupBy: (element) => element['parente'],
         groupSeparatorBuilder: (String groupByValue) => Padding(
           padding: EdgeInsets.all(10),

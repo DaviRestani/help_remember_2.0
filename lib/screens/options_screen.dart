@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:help_remember/widgets/menu_button.dart';
 
-void main(List<String> args) {
-  runApp(
-    const MaterialApp(
-      home: OptionsScreen(),
-    ),
-  );
-}
-
 class OptionsScreen extends StatelessWidget {
   const OptionsScreen({super.key});
 
@@ -17,7 +9,7 @@ class OptionsScreen extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(0, 0, 139, 1.0),
+          backgroundColor: const Color.fromARGB(255, 18, 93, 178),
           title: const Text(
             "Menu Principal",
             style: TextStyle(
@@ -66,19 +58,19 @@ class OptionsPageBox extends StatelessWidget {
                     padding: EdgeInsets.all(10.0),
                   ),
                   const MenuButton(
-                    route: '/dear_one_list',
+                    route: '/family_list',
                     text: "Família",
                     image: 'assets/icons/pessoas.png',
                   ),
                   const SizedBox(height: 6),
                   const MenuButton(
-                    route: '/medicine_page',
+                    route: '/medicine_list',
                     text: "Remédios",
                     image: 'assets/icons/remedio.png',
                   ),
                   const SizedBox(height: 6),
                   const MenuButton(
-                    route: '/physical_activity_page',
+                    route: '/physical_list',
                     text: "Atividades Físicas",
                     image: 'assets/icons/haltere.png',
                   ),
@@ -90,7 +82,7 @@ class OptionsPageBox extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   const MenuButton(
-                    route: '/food_page',
+                    route: '/food_list',
                     text: "Alimentação",
                     image: 'assets/icons/frutas.png',
                   ),

@@ -2,14 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../utilities/constants.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: LoginScreen(),
-    ),
-  );
-}
-
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -133,12 +125,14 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildLoginBtn() {
-    return Container(
+    return SizedBox(
       //padding: EdgeInsets.symmetric(vertical: 25.0),
       width: 250.0,
       height: 50.0,
       child: ElevatedButton(
-        onPressed: () => print('Botão Logar'),
+        onPressed: () {
+          Navigator.of(context).pushNamed('/options_list');
+        },
         child: Text(
           'LOGIN',
           style: TextStyle(
@@ -163,9 +157,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => print('Cadastrar'),
+      onTap: () {
+        Navigator.of(context).pushNamed('/cadastro_screen');
+      },
       child: RichText(
-        text: TextSpan(
+        text: const TextSpan(
           children: [
             TextSpan(
               text: 'Não tem conta? ',
@@ -203,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -217,11 +213,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: double.infinity,
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 40.0,
                     //vertical: 60.0,
                   ),
@@ -229,8 +225,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       _buildImage(),
-                      SizedBox(height: 20.0),
-                      Text(
+                      const SizedBox(height: 20.0),
+                      const Text(
                         'Bem-Vindo!',
                         style: TextStyle(
                           color: Colors.white,
@@ -239,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
+                      const Text(
                         'Logue sua Conta',
                         style: TextStyle(
                           color: Colors.white,
@@ -248,16 +244,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       _buildEmailTF(),
-                      SizedBox(
+                      const SizedBox(
                         height: 10.0,
                       ),
                       _buildPasswordTF(),
                       _buildForgotPasswordBtn(),
-                      SizedBox(height: 5.0),
+                      const SizedBox(height: 5.0),
                       _buildLoginBtn(),
-                      SizedBox(height: 5.0),
+                      const SizedBox(height: 5.0),
                       _buildSignupBtn(),
                     ],
                   ),
