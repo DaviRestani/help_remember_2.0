@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(200),
                 image: new DecorationImage(
-                  image: new AssetImage("icons/brain2.png"),
+                  image: new AssetImage("assets/icons/brain2.png"),
                   fit: BoxFit.fill,
                 ),
               ),

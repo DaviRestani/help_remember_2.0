@@ -1,51 +1,29 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import '../utilities/constants.dart';
 
-class CadastroScreen extends StatefulWidget {
+class FamilyCadastroScreen extends StatefulWidget {
   @override
-  _CadastroScreenState createState() => _CadastroScreenState();
+  _FamilyCadastroScreenState createState() => _FamilyCadastroScreenState();
 }
 
-class _CadastroScreenState extends State<CadastroScreen> {
-  bool _rememberMe = false;
-
-  Widget _buildImage() {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          Align(
-            alignment: AlignmentDirectional.center, // <-- SEE HERE
-            child: Container(
-                width: 600,
-                height: 200,
-                decoration: const BoxDecoration(
-                    color: Color(0xFF398AE5),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.zero,
-                        topRight: Radius.zero,
-                        bottomLeft: Radius.circular(120),
-                        bottomRight: Radius.circular(120)))),
-          ),
-          Positioned(
-            right: 80,
-            bottom: -13,
-            child: Container(
-              height: 230.0,
-              width: 270.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(200),
-                image: const DecorationImage(
-                  image: AssetImage("assets/icons/brainC.png"),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
+  File? _image;
+  PickedFile? _pickedFile;
+  final _picker = ImagePicker();
+  // Implementing the image picker
+  Future<void> _pickImage() async {
+    _pickedFile = await _picker.getImage(source: ImageSource.gallery);
+    if (_pickedFile != null) {
+      setState(() {
+        _image = File(_pickedFile!.path);
+      });
+    }
   }
+
+  bool _rememberMe = false;
 
   Widget _buildNameTF() {
     return Column(
@@ -57,7 +35,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
+          child: TextField(
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
@@ -70,7 +48,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                 Icons.person,
                 color: Color.fromARGB(255, 0, 0, 0),
               ),
-              hintText: 'Entre com seu Nome',
+              hintText: 'Nome',
               hintStyle: kHintTextStyleCadastro,
             ),
           ),
@@ -89,7 +67,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
+          child: TextField(
             keyboardType: TextInputType.text,
             style: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
@@ -99,10 +77,10 @@ class _CadastroScreenState extends State<CadastroScreen> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.male,
+                Icons.phone,
                 color: Color.fromARGB(255, 0, 0, 0),
               ),
-              hintText: 'Entre com seu sexo',
+              hintText: 'Contato',
               hintStyle: kHintTextStyleCadastro,
             ),
           ),
@@ -121,8 +99,8 @@ class _CadastroScreenState extends State<CadastroScreen> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
-            keyboardType: TextInputType.emailAddress,
+          child: TextField(
+            keyboardType: TextInputType.text,
             style: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
@@ -131,10 +109,10 @@ class _CadastroScreenState extends State<CadastroScreen> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.groups_2,
                 color: Color.fromARGB(255, 0, 0, 0),
               ),
-              hintText: 'Entre com seu E-mail',
+              hintText: 'Parentesco',
               hintStyle: kHintTextStyleCadastro,
             ),
           ),
@@ -149,12 +127,14 @@ class _CadastroScreenState extends State<CadastroScreen> {
       children: <Widget>[
         //SizedBox(height: 10.0),
         Container(
-          alignment: Alignment.centerLeft,
+          padding: EdgeInsets.only(left: 20),
+          alignment: Alignment.topLeft,
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
-          height: 40.0,
-          child: const TextField(
-            obscureText: true,
+          height: 200.0,
+          child: TextField(
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
             style: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
@@ -162,11 +142,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),
-              hintText: 'Entre com sua Senha',
+              hintText: '   Adicionar Descrição ...',
               hintStyle: kHintTextStyleCadastro,
             ),
           ),
@@ -175,18 +151,44 @@ class _CadastroScreenState extends State<CadastroScreen> {
     );
   }
 
+  Widget _buildImagePicker() {
+    return Column(children: [
+      Center(
+        child: GestureDetector(
+          child: const Text('Selecionar Imagem'),
+          //onPressed: _openImagePicker,
+          //onTap:()=> Get.find<ImageController>().pickImage(),
+          onTap: () => _pickImage(),
+        ),
+      ),
+      const SizedBox(height: 35),
+      Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: 70,
+        color: Colors.grey[300],
+        child: _pickedFile != null
+            ? Image.file(
+                File(_pickedFile!.path),
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+              )
+            : const Text('Please select an image'),
+      )
+    ]);
+  }
+
   Widget _buildLoginBtn() {
-    return SizedBox(
+    return Container(
       //padding: EdgeInsets.symmetric(vertical: 25.0),
       width: 250.0,
       height: 50.0,
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed('/options_list');
-        },
+        onPressed: () => print('Botão Logar'),
         child: Text(
           'REGISTRAR',
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.white,
             letterSpacing: 1.5,
             fontSize: 18.0,
@@ -199,7 +201,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0))),
           backgroundColor: MaterialStateProperty.all<Color>(
-            const Color(0xFF398AE5),
+            Color(0xFF398AE5),
           ),
         ),
       ),
@@ -209,7 +211,22 @@ class _CadastroScreenState extends State<CadastroScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: new Center(
+            child: new Text("Adicionar Ente",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Inknut Antiqua',
+                ))),
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -220,7 +237,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -234,48 +251,31 @@ class _CadastroScreenState extends State<CadastroScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    //vertical: 60.0,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 70.0,
+                    //vertical: 20.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      _buildImage(),
-                      const SizedBox(height: 20.0),
-                      const Text(
-                        'Cadastrar',
-                        style: TextStyle(
-                          color: Color(0xFF398AE5),
-                          fontFamily: 'Inknut Antiqua',
-                          fontSize: 45.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Text(
-                        'Crie sua Conta',
-                        style: TextStyle(
-                          color: Color(0xFF398AE5),
-                          fontFamily: 'Inknut Antiqua',
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
+                      //_buildImage(),
+                      SizedBox(height: 20.0),
                       _buildNameTF(),
-                      const SizedBox(
+                      SizedBox(
                         height: 5.0,
                       ),
                       _buildSexTF(),
-                      const SizedBox(height: 5.0),
+                      SizedBox(height: 5.0),
                       _buildEmailTF(),
-                      const SizedBox(height: 5.0),
+                      SizedBox(height: 5.0),
                       _buildPasswordTF(),
-                      const SizedBox(height: 15.0),
+                      //SizedBox(height: 5.0),
+                      //_buildImagePicker(),
+                      SizedBox(height: 15.0),
                       _buildLoginBtn(),
                     ],
                   ),

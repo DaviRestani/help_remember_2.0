@@ -6,7 +6,7 @@ List _dataDummyMedicine = [
     "albumId": 1,
     "id": 1,
     "title": "Paracetamol",
-    "thumbnailUrl": "icons/vitamina.png",
+    "thumbnailUrl": "assets/icons/vitamina.png",
     "tipo": "Remédio",
     "data": "08/04/23",
     "group": "d"
@@ -15,7 +15,7 @@ List _dataDummyMedicine = [
     "albumId": 1,
     "id": 2,
     "title": "Dipirona",
-    "thumbnailUrl": "icons/vitaminas.png",
+    "thumbnailUrl": "assets/icons/vitaminas.png",
     "tipo": "Anti-Inflamatório",
     "data": "09/04/23",
     "group": "a"
@@ -100,7 +100,8 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
         ),
       ),
       body: GroupedListView<dynamic, String>(
-        elements: _dataDummyMedicine, //Banco de Dados --------------------------
+        elements:
+            _dataDummyMedicine, //Banco de Dados --------------------------
         groupBy: (element) => element['tipo'],
         groupSeparatorBuilder: (String groupByValue) => Padding(
           padding: const EdgeInsets.all(10),

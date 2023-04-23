@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:help_remember/screens/add_family_screen.dart';
 import 'package:help_remember/screens/cadastro_screen.dart';
 import 'package:help_remember/screens/diary_screen.dart';
 import 'package:help_remember/screens/family_screen.dart';
@@ -26,6 +27,7 @@ class AppWidget extends StatelessWidget {
         '/medicine_list': (context) => GroupListMedicine(),
         '/physical_list': (context) => GroupListPhysical(),
         '/diary_page': (context) => GroupListDiary(),
+        '/add_family_screen': (context) => FamilyCadastroScreen(),
       },
     );
   }

@@ -6,7 +6,7 @@ List _dataDummy = [
     "albumId": 1,
     "id": 1,
     "title": "Treino básico",
-    "thumbnailUrl": "icons/esportes.png",
+    "thumbnailUrl": "assets/icons/esportes.png",
     "tipo": "Tipo A",
     "data": "08/04/23",
     "group": "d"
@@ -15,7 +15,7 @@ List _dataDummy = [
     "albumId": 1,
     "id": 2,
     "title": "Aerôbica",
-    "thumbnailUrl": "icons/atividade-fisica.png",
+    "thumbnailUrl": "assets/icons/atividade-fisica.png",
     "tipo": "Tipo B",
     "data": "09/04/23",
     "group": "a"

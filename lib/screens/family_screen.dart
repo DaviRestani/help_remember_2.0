@@ -6,7 +6,7 @@ List _dataDummyFamily = [
     "albumId": 1,
     "id": 1,
     "title": "Davi Restani",
-    "thumbnailUrl": "icons/Davi.png",
+    "thumbnailUrl": "assets/icons/pessoas.png",
     "parente": "Amigo",
     "data": "08/04/23",
     "group": "d"
@@ -15,7 +15,7 @@ List _dataDummyFamily = [
     "albumId": 1,
     "id": 2,
     "title": "Ayslan Conti",
-    "thumbnailUrl": "icons/Ayslan.png",
+    "thumbnailUrl": "assets/icons/pessoas.png",
     "parente": "Amigo",
     "data": "09/04/23",
     "group": "a"
@@ -24,7 +24,7 @@ List _dataDummyFamily = [
     "albumId": 1,
     "id": 3,
     "title": "Gabriel Cardoso",
-    "thumbnailUrl": "icons/Harry.png",
+    "thumbnailUrl": "assets/icons/pessoas.png",
     "parente": "Amigo",
     "data": "10/04/23",
     "group": "g"
@@ -33,7 +33,7 @@ List _dataDummyFamily = [
     "albumId": 1,
     "id": 4,
     "title": "Roberto Rodriguez",
-    "thumbnailUrl": "icons/vitaminas.png",
+    "thumbnailUrl": "assets/icons/pessoas.png",
     "parente": "Conhecido",
     "data": "10/04/23",
     "group": "r"
@@ -128,7 +128,7 @@ class _GroupListFamilyState extends State<GroupListFamily> {
                   child: Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 10, right: 10),
+                    margin: EdgeInsets.only(left: 40, right: 10),
                     child: Text(
                       groupByValue,
                       textAlign: TextAlign.start,
@@ -147,7 +147,7 @@ class _GroupListFamilyState extends State<GroupListFamily> {
         itemBuilder: (context, dynamic element) {
           return Card(
             elevation: 10,
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+            margin: EdgeInsets.symmetric(horizontal: 40, vertical: 3),
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -253,7 +253,7 @@ class _GroupListFamilyState extends State<GroupListFamily> {
                         children: [
                           Icon(Icons.delete,
                               color: Color.fromARGB(255, 255, 255, 255),
-                              size: 25),
+                              size: 18),
                         ],
                       ),
                       style: ButtonStyle(
@@ -279,7 +279,7 @@ class _GroupListFamilyState extends State<GroupListFamily> {
                         children: [
                           Icon(Icons.create,
                               color: Color.fromARGB(255, 255, 255, 255),
-                              size: 25),
+                              size: 18),
                         ],
                       ),
                       style: ButtonStyle(
@@ -306,7 +306,9 @@ class _GroupListFamilyState extends State<GroupListFamily> {
       ),
       floatingActionButton: _showFab
           ? FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed('/add_family_screen');
+              },
               tooltip: 'Criar',
               child: const Icon(Icons.add),
             )

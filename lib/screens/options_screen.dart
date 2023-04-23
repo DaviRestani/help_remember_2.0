@@ -9,7 +9,8 @@ class OptionsScreen extends StatelessWidget {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 18, 93, 178),
+          backgroundColor:
+              Colors.blue, //const Color.fromARGB(255, 18, 93, 178),
           title: const Text(
             "Menu Principal",
             style: TextStyle(
@@ -47,15 +48,10 @@ class OptionsPageBox extends StatelessWidget {
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 children: [
-                  Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Image.asset(
-                        'assets/icons/help_remember.png',
-                        width: 200,
-                        height: 350,
-                      )),
-                  const Padding(
-                    padding: EdgeInsets.all(10.0),
+                  Image.asset(
+                    'assets/icons/help_remember.png',
+                    width: 200,
+                    height: 350,
                   ),
                   const MenuButton(
                     route: '/family_list',
@@ -78,13 +74,19 @@ class OptionsPageBox extends StatelessWidget {
                   const MenuButton(
                     route: '/diary_page',
                     text: "Diário",
-                    image: 'assets/icons/pencil.png',
+                    image: 'assets/icons/diario cópia.png',
                   ),
                   const SizedBox(height: 6),
                   const MenuButton(
                     route: '/food_list',
                     text: "Alimentação",
-                    image: 'assets/icons/frutas.png',
+                    image: 'assets/icons/talheres-de-bebe.png',
+                  ),
+                  const SizedBox(height: 6),
+                  const MenuButton(
+                    route: '/games_page',
+                    text: "Jogos de Memória",
+                    image: 'assets/icons/memory.png',
                   ),
                 ],
               ),
