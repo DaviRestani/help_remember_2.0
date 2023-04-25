@@ -115,7 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () => print('Esqueceu sua Senha, pressione o botão'),
+        onPressed: () {
+          print('Esqueceu sua Senha, pressione o botão');
+          Navigator.of(context).pushNamed('/forgot_password_screen');
+        },
         child: Text(
           'Esqueceu sua Senha?',
           style: kLabelStyle,

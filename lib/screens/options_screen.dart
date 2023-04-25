@@ -20,7 +20,7 @@ class OptionsScreen extends StatelessWidget {
           ),
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {},// Colocar uma tela que mostra as informações da pessoa que está logada
                 tooltip: 'Login',
                 icon: const Icon(Icons.person))
           ],

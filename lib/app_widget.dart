@@ -4,6 +4,8 @@ import 'package:help_remember/screens/cadastro_screen.dart';
 import 'package:help_remember/screens/diary_screen.dart';
 import 'package:help_remember/screens/family_screen.dart';
 import 'package:help_remember/screens/food_screen.dart';
+import 'package:help_remember/screens/forgot_password_screen.dart';
+import 'package:help_remember/screens/games_screen.dart';
 import 'package:help_remember/screens/login_screen.dart';
 import 'package:help_remember/screens/medicine_screen.dart';
 import 'package:help_remember/screens/options_screen.dart';
@@ -27,7 +29,9 @@ class AppWidget extends StatelessWidget {
         '/medicine_list': (context) => GroupListMedicine(),
         '/physical_list': (context) => GroupListPhysical(),
         '/diary_page': (context) => GroupListDiary(),
+        '/games_page': (context) => GamesScreen(),
         '/add_family_screen': (context) => FamilyCadastroScreen(),
+        '/forgot_password_screen': (context) => ForgotPasswordPage(),
       },
     );
   }
