@@ -3,46 +3,26 @@ import 'package:flutter/services.dart';
 import '../utilities/constants.dart';
 
 class CadastroScreen extends StatefulWidget {
+  const CadastroScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _CadastroScreenState createState() => _CadastroScreenState();
 }
 
 class _CadastroScreenState extends State<CadastroScreen> {
-  bool _rememberMe = false;
-
+  
   Widget _buildImage() {
     return Container(
-      child: Stack(
-        children: <Widget>[
-          Align(
-            alignment: AlignmentDirectional.center, // <-- SEE HERE
-            child: Container(
-                width: 600,
-                height: 200,
-                decoration: const BoxDecoration(
-                    color: Color(0xFF398AE5),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.zero,
-                        topRight: Radius.zero,
-                        bottomLeft: Radius.circular(120),
-                        bottomRight: Radius.circular(120)))),
-          ),
-          Positioned(
-            right: 80,
-            bottom: -13,
-            child: Container(
-              height: 230.0,
-              width: 270.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(200),
-                image: const DecorationImage(
-                  image: AssetImage("assets/icons/brainC.png"),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-        ],
+      height: 280.0,
+      width: 280.0,
+      decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.circular(200),
+        image: const DecorationImage(
+          image: AssetImage("assets/icons/brainC.png"),
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }
@@ -184,22 +164,22 @@ class _CadastroScreenState extends State<CadastroScreen> {
         onPressed: () {
           Navigator.of(context).pushNamed('/options_list');
         },
-        child: Text(
-          'REGISTRAR',
-          style: const TextStyle(
-            color: Colors.white,
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Inknut Antiqua',
-          ),
-        ),
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0))),
           backgroundColor: MaterialStateProperty.all<Color>(
             const Color(0xFF398AE5),
+          ),
+        ),
+        child: const Text(
+          'REGISTRAR',
+          style: TextStyle(
+            color: Colors.white,
+            letterSpacing: 1.5,
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Inknut Antiqua',
           ),
         ),
       ),

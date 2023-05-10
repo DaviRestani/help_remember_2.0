@@ -51,11 +51,6 @@ class _DemoBottomAppBar extends StatelessWidget {
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
           children: <Widget>[
-            IconButton(
-              tooltip: 'Menu',
-              icon: const Icon(Icons.menu),
-              onPressed: () {},
-            ),
             if (centerLocations.contains(fabLocation)) const Spacer(),
             IconButton(
               tooltip: 'Pesquisar',
@@ -65,7 +60,9 @@ class _DemoBottomAppBar extends StatelessWidget {
             IconButton(
               tooltip: 'Calendário',
               icon: const Icon(Icons.calendar_month),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed('/calendar_page');
+              },
             ),
           ],
         ),
@@ -83,20 +80,72 @@ class _GroupListFoodState extends State<GroupListFood> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.menu_book),
+              title: const Text('Menu Principal'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Família'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/family_list');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.medication),
+              title: const Text('Remédios'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/medicine_list');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.sports_baseball),
+              title: const Text('Atividade Fisíca'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/physical_list');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.book_outlined),
+              title: const Text('Diário'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/diary_page');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.food_bank),
+              title: const Text('Alimentação'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/food_list');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.games),
+              title: const Text('Jogos'),
+              onTap: () {
+                Navigator.of(context).pushNamed('/games_page');
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: const Center(
-            child: Text("Dietas",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Inknut Antiqua',
-                ))),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          child: Text(
+            "Dietas",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 25.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Inknut Antiqua',
+            ),
+          ),
         ),
       ),
       body: GroupedListView<dynamic, String>(
@@ -206,58 +255,41 @@ class _GroupListFoodState extends State<GroupListFood> {
                           ],
                         ),
                       )),
-                  Expanded(
-                      child: Container(
-                    width: 40.0,
-                    height: 50.0,
-                    child: ElevatedButton(
-                      onPressed: () => print('Botão Logar'),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(Icons.delete,
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              size: 25),
-                        ],
-                      ),
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0))),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromARGB(255, 213, 38, 38),
-                        ),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: const Icon(
+                        Icons.delete,
+                        color: Colors.white,
                       ),
                     ),
-                  )),
-                  Expanded(
-                      child: Container(
-                    width: 40.0,
-                    height: 50.0,
-                    child: ElevatedButton(
-                      onPressed: () => print('Botão Logar'),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(Icons.create,
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              size: 25),
-                        ],
-                      ),
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0))),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromARGB(255, 202, 39, 158),
-                        ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      color: Colors.purple,
+                      shape: BoxShape.circle,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/edit_food');
+                      },
+                      child: const Icon(
+                        Icons.create,
+                        color: Colors.white,
                       ),
                     ),
-                  ))
+                  ),
                 ],
               ),
             ),
@@ -271,7 +303,9 @@ class _GroupListFoodState extends State<GroupListFood> {
       ),
       floatingActionButton: _showFab
           ? FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed('/add_food');
+              },
               tooltip: 'Criar',
               child: const Icon(Icons.add),
             )

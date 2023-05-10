@@ -16,7 +16,7 @@ class ForgotPasswordPage extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.only(top: 60, left: 40, right: 40),
+        padding: const EdgeInsets.only(top: 60, left: 40, right: 40),
         color: Colors.white,
         child: ListView(
           children: <Widget>[

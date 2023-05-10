@@ -12,52 +12,53 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildImage() {
     return Container(
-      child: Stack(
-        children: <Widget>[
-          Align(
-            alignment: AlignmentDirectional.center, // <-- SEE HERE
-            child: Container(
-                width: 600,
-                height: 200,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.zero,
-                        topRight: Radius.zero,
-                        bottomLeft: Radius.circular(120),
-                        bottomRight: Radius.circular(120)))),
-          ),
-          Positioned(
-            right: 70,
-            bottom: -50,
-            child: Container(
-              height: 280.0,
-              width: 280.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(200),
-                image: new DecorationImage(
-                  image: new AssetImage("assets/icons/brain2.png"),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-        ],
+      height: 280.0,
+      width: 280.0,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(200),
+        image: const DecorationImage(
+          image: AssetImage("assets/icons/brain2.png"),
+          fit: BoxFit.fill,
+        ),
       ),
     );
+    // return Container(
+    //   child: Stack(
+    //     children: <Widget>[
+    //       // Align(
+    //       //   alignment: AlignmentDirectional.center, // <-- SEE HERE
+    //       //   child: Container(
+    //       //       width: 600,
+    //       //       height: 200,
+    //       //       decoration: BoxDecoration(
+    //       //           color: Color.fromARGB(255, 255, 255, 255),
+    //       //           borderRadius: BorderRadius.only(
+    //       //               topLeft: Radius.zero,
+    //       //               topRight: Radius.zero,
+    //       //               bottomLeft: Radius.circular(120),
+    //       //               bottomRight: Radius.circular(120)))),
+    //       // ),
+    //       // Positioned(
+    //       //   right: 70,
+    //       //   bottom: -50,
+    //       //   child:
+    //       // ),
+    //     ],
+    //   ),
+    // );
   }
 
   Widget _buildEmailTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           width: 390.0,
           height: 60.0,
-          child: TextField(
+          child: const TextField(
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -89,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           width: 390.0,
           height: 60.0,
-          child: TextField(
+          child: const TextField(
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -119,9 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
           print('Esqueceu sua Senha, pressione o botão');
           Navigator.of(context).pushNamed('/forgot_password_screen');
         },
-        child: Text(
+        child: const Text(
           'Esqueceu sua Senha?',
           style: kLabelStyle,
+          textAlign: TextAlign.center,
         ),
       ),
     );
@@ -134,9 +136,17 @@ class _LoginScreenState extends State<LoginScreen> {
       height: 50.0,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/options_list');
+          Navigator.of(context).pushNamed('/');
         },
-        child: Text(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0))),
+          backgroundColor: MaterialStateProperty.all<Color>(
+            Colors.white,
+          ),
+        ),
+        child: const Text(
           'LOGIN',
           style: TextStyle(
             color: Color(0xFF527DAA),
@@ -144,14 +154,6 @@ class _LoginScreenState extends State<LoginScreen> {
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'Inknut Antiqua',
-          ),
-        ),
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0))),
-          backgroundColor: MaterialStateProperty.all<Color>(
-            Colors.white,
           ),
         ),
       ),
@@ -191,78 +193,79 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-              //SizedBox(height: 30.0),
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF73AEF5),
-                      Color(0xFF61A4F1),
-                      Color(0xFF478DE0),
-                      Color(0xFF398AE5),
-                    ],
-                    stops: [0.1, 0.4, 0.7, 0.9],
+      body: SafeArea(
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Stack(
+              children: <Widget>[
+                //SizedBox(height: 30.0),
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color(0xFF73AEF5),
+                        Color(0xFF61A4F1),
+                        Color(0xFF478DE0),
+                        Color(0xFF398AE5),
+                      ],
+                      stops: [0.1, 0.4, 0.7, 0.9],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    //vertical: 60.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      _buildImage(),
-                      const SizedBox(height: 20.0),
-                      const Text(
-                        'Bem-Vindo!',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Inknut Antiqua',
-                          fontSize: 45.0,
-                          fontWeight: FontWeight.bold,
+                SizedBox(
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40.0,
+                      //vertical: 60.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        _buildImage(),
+                        const SizedBox(height: 20.0),
+                        const Text(
+                          'Bem-Vindo!',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Inknut Antiqua',
+                            fontSize: 45.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const Text(
-                        'Logue sua Conta',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Inknut Antiqua',
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
+                        const Text(
+                          'Logue sua Conta',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Inknut Antiqua',
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      _buildEmailTF(),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      _buildPasswordTF(),
-                      _buildForgotPasswordBtn(),
-                      const SizedBox(height: 5.0),
-                      _buildLoginBtn(),
-                      const SizedBox(height: 5.0),
-                      _buildSignupBtn(),
-                    ],
+                        const SizedBox(height: 20.0),
+                        _buildEmailTF(),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        _buildPasswordTF(),
+                        _buildForgotPasswordBtn(),
+                        const SizedBox(height: 5.0),
+                        _buildLoginBtn(),
+                        const SizedBox(height: 5.0),
+                        _buildSignupBtn(),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

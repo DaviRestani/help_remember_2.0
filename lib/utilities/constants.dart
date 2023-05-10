@@ -43,3 +43,13 @@ final kBoxDecorationStyleCadastro = BoxDecoration(
     width: 1,
   ),
 );
+
+final kBoxDecorationStyleText = BoxDecoration(
+  color: const Color.fromARGB(255, 255, 255, 255),
+  borderRadius: BorderRadius.circular(10.0),
+);
+
+final kBoxDecorationStyleText2 = BoxDecoration(
+  color: Color.fromARGB(255, 240, 235, 235),
+  borderRadius: BorderRadius.circular(10.0),
+);
