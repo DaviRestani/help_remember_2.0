@@ -154,7 +154,7 @@ class _GroupListFamilyState extends State<GroupListFamily> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            "Entes Queridos",
+            "Família",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 25.0,

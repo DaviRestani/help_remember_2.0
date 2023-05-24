@@ -31,6 +31,7 @@ D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/prato.png
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/remedio%20(1).png
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/remedio.png
+D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/reset_password_image.jpg
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/saudavel.png
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/seguro-familiar.png
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/sexos.png
