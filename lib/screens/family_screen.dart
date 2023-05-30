@@ -99,6 +99,9 @@ class _GroupListFamilyState extends State<GroupListFamily> {
       drawer: Drawer(
         child: Column(
           children: [
+            const SizedBox(
+              height: 32,
+            ),
             ListTile(
               leading: const Icon(Icons.menu_book),
               title: const Text('Menu Principal'),
@@ -168,18 +171,18 @@ class _GroupListFamilyState extends State<GroupListFamily> {
         elements: _dataDummyFamily, //Banco de Dados --------------------------
         groupBy: (element) => element['parente'],
         groupSeparatorBuilder: (String groupByValue) => Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Row(
             children: [
               Flexible(
                   child: Row(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 40, right: 10),
+                    margin: const EdgeInsets.only(left: 40, right: 10),
                     child: Text(
                       groupByValue,
                       textAlign: TextAlign.start,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Inknut Antiqua',
@@ -194,10 +197,10 @@ class _GroupListFamilyState extends State<GroupListFamily> {
         itemBuilder: (context, dynamic element) {
           return Card(
             elevation: 10,
-            margin: EdgeInsets.symmetric(horizontal: 40, vertical: 3),
+            margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 3),
             child: Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
@@ -233,16 +236,16 @@ class _GroupListFamilyState extends State<GroupListFamily> {
                   Expanded(
                       flex: 5,
                       child: Container(
-                        padding: EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.only(bottom: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(left: 10, right: 10),
+                              padding: const EdgeInsets.only(left: 10, right: 10),
                               child: Text(
                                 element['title'],
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontFamily: 'Inknut Antiqua',
@@ -253,16 +256,16 @@ class _GroupListFamilyState extends State<GroupListFamily> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsets.only(left: 10, right: 10, top: 5),
+                                  const EdgeInsets.only(left: 10, right: 10, top: 5),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.account_circle_sharp,
+                                  const Icon(Icons.account_circle_sharp,
                                       color: Color.fromARGB(255, 255, 255, 255),
                                       size: 16),
                                   Container(
-                                    margin: EdgeInsets.only(left: 10),
+                                    margin: const EdgeInsets.only(left: 10),
                                     child: Text('${element['parente']}'),
                                   )
                                 ],
@@ -270,16 +273,16 @@ class _GroupListFamilyState extends State<GroupListFamily> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsets.only(left: 10, right: 10, top: 5),
+                                  const EdgeInsets.only(left: 10, right: 10, top: 5),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.calendar_today,
+                                  const Icon(Icons.calendar_today,
                                       color: Color.fromARGB(255, 255, 255, 255),
                                       size: 16),
                                   Container(
-                                    margin: EdgeInsets.only(left: 10),
+                                    margin: const EdgeInsets.only(left: 10),
                                     child: Text('${element['data']}'),
                                   )
                                 ],

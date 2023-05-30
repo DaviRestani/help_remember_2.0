@@ -87,6 +87,9 @@ class _GroupListDiaryState extends State<GroupListDiary> {
       drawer: Drawer(
         child: Column(
           children: [
+            const SizedBox(
+              height: 32,
+            ),
             ListTile(
               leading: const Icon(Icons.menu_book),
               title: const Text('Menu Principal'),

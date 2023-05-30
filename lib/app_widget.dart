@@ -4,23 +4,23 @@ import 'package:help_remember/screens/add_diary.dart';
 import 'package:help_remember/screens/add_family_screen.dart';
 import 'package:help_remember/screens/add_food.dart';
 import 'package:help_remember/screens/add_medicine.dart';
-import 'package:help_remember/screens/alimentacao.dart';
+import 'package:help_remember/screens/edit_food.dart';
 import 'package:help_remember/screens/cadastro_screen.dart';
 import 'package:help_remember/screens/calendar_page.dart';
-import 'package:help_remember/screens/diario.dart';
+import 'package:help_remember/screens/edit_diary.dart';
+import 'package:help_remember/screens/family_screen.dart';
 import 'package:help_remember/screens/games_screen.dart';
 import 'package:help_remember/screens/diary_screen.dart';
-import 'package:help_remember/screens/ente.dart';
-import 'package:help_remember/screens/family_screen.dart';
+import 'package:help_remember/screens/edit_family.dart';
 import 'package:help_remember/screens/food_screen.dart';
 import 'package:help_remember/screens/forgot_password_screen.dart';
 import 'package:help_remember/screens/login_screen.dart';
 import 'package:help_remember/screens/medicine_screen.dart';
 import 'package:help_remember/screens/menu_screen.dart';
 import 'package:help_remember/screens/phisical_activity_screen.dart';
-import 'package:help_remember/screens/remedio.dart';
-import 'package:help_remember/screens/treino.dart';
-import 'package:help_remember/screens/the_memory_match_game.dart';
+import 'package:help_remember/screens/edit_remedy.dart';
+import 'package:help_remember/screens/edit_phisical.dart';
+import 'package:help_remember/ui/pages/startup_page.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -51,9 +51,9 @@ class AppWidget extends StatelessWidget {
         '/edit_phisical': (context) => PhisicalEditScreen(),
         '/edit_medicine': (context) => EditMedicineScreen(),
         '/edit_diary': (context) => EditPhisicalPage(),
-        '/edit_family': (context) => EditFamilyPage(),
+        '/edit_family': (context) => GroupListEditFamily(),
         '/edit_food': (context) => EditFoodScreen(),
-        '/memory_game': (context) => TheMemoryMatchGame()
+        '/memory_game': (context) => const StartUpPage()
       },
     );
   }

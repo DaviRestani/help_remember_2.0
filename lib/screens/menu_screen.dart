@@ -20,6 +20,7 @@ class MenuScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
+              key: const Key('Person'),
               onPressed: () {
                 Navigator.of(context).pushNamed('/login_screen');
               }, // Colocar uma tela que mostra as informações da pessoa que está logada
@@ -27,7 +28,7 @@ class MenuScreen extends StatelessWidget {
               icon: const Icon(Icons.person))
         ],
       ),
-      body: MenuPageBox(),
+      body: const MenuPageBox(),
     );
   }
 }

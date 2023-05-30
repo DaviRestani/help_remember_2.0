@@ -16,6 +16,9 @@ class _GamesScreenState extends State<GamesScreen> {
       drawer: Drawer(
         child: Column(
           children: [
+            const SizedBox(
+              height: 32,
+            ),
             ListTile(
               leading: const Icon(Icons.menu_book),
               title: const Text('Menu Principal'),

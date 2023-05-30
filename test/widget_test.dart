@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 
 void main() {
-  testWidgets('Test Widget', (WidgetTester tester) async {
+  testWidgets('Teste de verificação do widget para ir para a tela de Login', (WidgetTester tester) async {
     Future<void> _createWidget(WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
         title: 'Flutter',
@@ -26,7 +26,7 @@ void main() {
     expect(find.byIcon(Icons.person), findsOneWidget);
   });
 
-  testWidgets('Teste de widgets', (WidgetTester tester) async {
+  testWidgets('Teste de localização do widget Menu Button', (WidgetTester tester) async {
     Future<void> _createWidget(WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
         title: 'Flutter',
