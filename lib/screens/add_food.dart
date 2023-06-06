@@ -104,6 +104,8 @@ class _AddDietaState extends State<AddDieta> {
     super.initState();
   }
 
+  List<String> diasDaSemana = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,216 +187,98 @@ class _AddDietaState extends State<AddDieta> {
               const SizedBox(
                 height: 10.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    width: 65.0,
-                    height: 50.0,
-                    decoration: BoxDecoration(
-                        color:
-                            (enabled_dom) ? Colors.black : Colors.transparent,
-                        borderRadius: BorderRadiusDirectional.circular(100.0)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            setState(() => enabled_dom = !enabled_dom),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: enabled_dom
-                              ? Colors.white
-                              : const Color(
-                                  0xff1b2c57), // This is what you need!
-                        ),
-                        child: const Text(
-                          'Dom',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 65.0,
-                    height: 50.0,
-                    //decoration: BoxDecoration(
-                    //    color:
-                    //        (enabled_seg) ? Colors.black : Colors.transparent,
-                    //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            setState(() => enabled_seg = !enabled_seg),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: enabled_seg
-                              ? Colors.white
-                              : const Color(0xff1b2c57),
-                          foregroundColor: enabled_seg
-                              ? const Color(0xff1b2c57)
-                              : Colors
-                                  .white, // This is what you need! // This is what you need!
-                        ),
-                        child: const Text(
-                          'Seg',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 65.0,
-                    height: 50.0,
-                    //decoration: BoxDecoration(
-                    //    color:
-                    //        (enabled_ter) ? Colors.black : Colors.transparent,
-                    //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            setState(() => enabled_ter = !enabled_ter),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: enabled_ter
-                              ? Colors.white
-                              : const Color(0xff1b2c57),
-                          foregroundColor: enabled_ter
-                              ? const Color(0xff1b2c57)
-                              : Colors
-                                  .white, // This is what you need! // This is what you need!
-                        ),
-                        child: const Text(
-                          'Ter',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 65.0,
-                    height: 50.0,
-                    //decoration: BoxDecoration(
-                    //    color:
-                    //        (enabled_qua) ? Colors.black : Colors.transparent,
-                    //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            setState(() => enabled_qua = !enabled_qua),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: enabled_qua
-                              ? Colors.white
-                              : const Color(0xff1b2c57),
-                          foregroundColor: enabled_qua
-                              ? const Color(0xff1b2c57)
-                              : Colors
-                                  .white, // This is what you need! // This is what you need!
-                        ),
-                        child: const Text(
-                          'Qua',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12.0),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ...diasDaSemana.map(
+                      (e) => SizedBox(
+                        width: 65.0,
+                        height: 50.0,
+                        //decoration: BoxDecoration(
+                        //    color:
+                        //        (enabled_seg) ? Colors.black : Colors.transparent,
+                        //    borderRadius: BorderRadiusDirectional.circular(100.0)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(3.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              switch (e) {
+                                case 'DOM':
+                                  enabled_dom = !enabled_dom;
+                                  break;
+                                case 'SEG':
+                                  enabled_seg = !enabled_seg;
+                                  break;
+                                case 'TER':
+                                  enabled_ter = !enabled_ter;
+                                  break;
+                                case 'QUA':
+                                  enabled_qua = !enabled_qua;
+                                  break;
+                                case 'QUI':
+                                  enabled_qui = !enabled_qui;
+                                  break;
+                                case 'SEX':
+                                  enabled_sex = !enabled_sex;
+                                  break;
+                                case 'SAB':
+                                  enabled_sab = !enabled_sab;
+                                  break;
+                              }
+                              setState(() {});
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: (() {
+                                if (e == 'DOM' && enabled_dom) {
+                                  return Colors.white;
+                                } else if (e == 'SEG' && enabled_seg) {
+                                  return Colors.white;
+                                } else if (e == 'TER' && enabled_ter) {
+                                  return Colors.white;
+                                } else if (e == 'QUA' && enabled_qua) {
+                                  return Colors.white;
+                                } else if (e == 'QUI' && enabled_qui) {
+                                  return Colors.white;
+                                } else if (e == 'SEX' && enabled_sex) {
+                                  return Colors.white;
+                                } else if (e == 'SAB' && enabled_sab) {
+                                  return Colors.white;
+                                } else {
+                                  return const Color(0xff1b2c57);
+                                }
+                              })(),
+                              foregroundColor: (() {
+                                if (e == 'DOM' && enabled_dom) {
+                                  return const Color(0xff1b2c57);
+                                } else if (e == 'SEG' && enabled_seg) {
+                                  return const Color(0xff1b2c57);
+                                } else if (e == 'TER' && enabled_ter) {
+                                  return const Color(0xff1b2c57);
+                                } else if (e == 'QUA' && enabled_qua) {
+                                  return const Color(0xff1b2c57);
+                                } else if (e == 'QUI' && enabled_qui) {
+                                  return const Color(0xff1b2c57);
+                                } else if (e == 'SEX' && enabled_sex) {
+                                  return const Color(0xff1b2c57);
+                                } else if (e == 'SAB' && enabled_sab) {
+                                  return const Color(0xff1b2c57);
+                                } else {
+                                  return Colors.white;
+                                }
+                              })(),
+                            ),
+                            child: Text(
+                              e,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 10.0),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 65.0,
-                    height: 50.0,
-                    //decoration: BoxDecoration(
-                    //    color:
-                    //        (enabled_qui) ? Colors.black : Colors.transparent,
-                    //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            setState(() => enabled_qui = !enabled_qui),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: enabled_qui
-                              ? Colors.white
-                              : const Color(0xff1b2c57),
-                          foregroundColor: enabled_qui
-                              ? const Color(0xff1b2c57)
-                              : Colors
-                                  .white, // This is what you need! // This is what you need!
-                        ),
-                        child: const Text(
-                          'Qui',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 65.0,
-                    height: 50.0,
-                    //decoration: BoxDecoration(
-                    //    color:
-                    //        (enabled_sex) ? Colors.black : Colors.transparent,
-                    //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            setState(() => enabled_sex = !enabled_sex),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: enabled_sex
-                              ? Colors.white
-                              : const Color(0xff1b2c57),
-                          foregroundColor: enabled_sex
-                              ? const Color(0xff1b2c57)
-                              : Colors
-                                  .white, // This is what you need! // This is what you need!
-                        ),
-                        child: const Text(
-                          'Sex',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 65.0,
-                    height: 50.0,
-                    //decoration: BoxDecoration(
-                    //    color:
-                    //        (enabled_sab) ? Colors.black : Colors.transparent,
-                    //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            setState(() => enabled_sab = !enabled_sab),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: enabled_sab
-                              ? Colors.white
-                              : const Color(0xff1b2c57),
-                          foregroundColor: enabled_sab
-                              ? const Color(0xff1b2c57)
-                              : Colors.white, // This is what you need!
-                        ),
-                        child: const Text(
-                          'Sab',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  //circleDay('Dom', context, true),
-                  //circleDay('Seg', context, false),
-                  //circleDay('Ter', context, false),
-                  //circleDay('Qua', context, false),
-                  //circleDay('Qui', context, false),
-                  //circleDay('Sex', context, true),
-                  //circleDay('Sab', context, false),
-                ],
+                    )
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20.0,
