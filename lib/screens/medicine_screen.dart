@@ -1,5 +1,9 @@
+import 'dart:convert';
+import '../bin/services/SharedVariablesToken.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 List _dataDummyMedicine = [
   {
@@ -76,6 +80,37 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
   final bool _showNotch = true;
   final FloatingActionButtonLocation _fabLocation =
       FloatingActionButtonLocation.centerDocked;
+
+  Future<void> obterLista() async {
+    var url = 'http://localhost:4000/getAllRemedy';
+
+    try {
+      //var prefs = await SharedPreferences.getInstance();
+      //var token = prefs.getString('token');
+      var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODczMDQ5ODYsInVzZXJJRCI6Ik9iamVjdElkKFwiNjQ5MjNiMGJjZGY3ZTI0MmI5OTc4MTMwXCIpIn0.Okc_W9jSA9aH_-b42DS37ourvg-0f8WgiFbupb2eYds';
+
+      if (token != null) {
+        var response = await http.get(Uri.parse(url), headers: {
+          'Authorization': 'Bearer $token',
+        });
+
+        if (response.statusCode == 200) {
+          // Lista obtida com sucesso
+          var lista = jsonDecode(response.body);
+          print('Lista: $lista');
+        } else {
+          // Falha ao obter a lista
+          print('Falha ao obter a lista. Status code: ${response.statusCode}');
+        }
+      } else {
+        // Token não encontrado, o usuário não está autenticado
+        print('Usuário não autenticado. Faça o login primeiro.');
+      }
+    } catch (e) {
+      // Erro de conexão
+      print('Erro de conexão: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

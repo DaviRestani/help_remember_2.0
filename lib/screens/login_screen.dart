@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../bin/services/SharedVariablesToken.dart';
 import '../utilities/constants.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,6 +13,41 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
+
+  void fazerLogin(String email, String password) async {
+    var url = 'http://localhost:9300/login';
+    try {
+      var response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({"email": email, "password": password}),
+      );
+      print(response.body);
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
+
+      String token = jsonData['token'];
+      print(token);
+      if (response.statusCode == 200) {
+        // Login bem-sucedido
+        print('Login realizado com sucesso!');
+
+        // Obtenha o token do cookie de resposta
+        var token = response.headers;
+        // Guarde o token localmente (exemplo: usando SharedPreferences)
+        //var prefs = await SharedPreferences.getInstance();
+        //prefs.setString('token', token!);
+        //SharedVariables.token = token as String;
+      } else {
+        // Falha no login
+        print('Falha no login. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Erro de conexão
+      print('Erro de conexão: $e');
+    }
+  }
 
   Widget _buildImage() {
     return Container(
@@ -22,30 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-    // return Container(
-    //   child: Stack(
-    //     children: <Widget>[
-    //       // Align(
-    //       //   alignment: AlignmentDirectional.center, // <-- SEE HERE
-    //       //   child: Container(
-    //       //       width: 600,
-    //       //       height: 200,
-    //       //       decoration: BoxDecoration(
-    //       //           color: Color.fromARGB(255, 255, 255, 255),
-    //       //           borderRadius: BorderRadius.only(
-    //       //               topLeft: Radius.zero,
-    //       //               topRight: Radius.zero,
-    //       //               bottomLeft: Radius.circular(120),
-    //       //               bottomRight: Radius.circular(120)))),
-    //       // ),
-    //       // Positioned(
-    //       //   right: 70,
-    //       //   bottom: -50,
-    //       //   child:
-    //       // ),
-    //     ],
-    //   ),
-    // );
   }
 
   Widget _buildEmailTF() {
@@ -58,13 +73,14 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           width: 390.0,
           height: 60.0,
-          child: const TextField(
+          child: TextField(
+            controller: _controllerEmail,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -90,13 +106,14 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           width: 390.0,
           height: 60.0,
-          child: const TextField(
+          child: TextField(
+            controller: _controllerPassword,
             obscureText: true,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -136,7 +153,11 @@ class _LoginScreenState extends State<LoginScreen> {
       height: 50.0,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/');
+          String password = _controllerPassword.text;
+          String email = _controllerEmail.text;
+          print('VAI CURINTIA!!!!!!');
+          print("Senha: ${password}");
+          fazerLogin(email, password);
         },
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

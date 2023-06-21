@@ -1,6 +1,7 @@
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/icudtl.dat
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/flutter_windows.dll
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/AssetManifest.json
+D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/family.json
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/2944_R0lVIEFOTiAzMDEtNTY.png
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/alimentacao-de-bebe.png
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/assets/icons/atividade-fisica.png
@@ -44,7 +45,6 @@ D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/FontManifest.json
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/kernel_blob.bin
-D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/NOTICES
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/NOTICES.Z
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
 D:/Desktop/help_remember_2.0-main/build/windows/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag

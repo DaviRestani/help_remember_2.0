@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../utilities/constants.dart';
+import 'package:http/http.dart' as http;
 
 class CadastroScreen extends StatefulWidget {
   const CadastroScreen({super.key});
@@ -11,7 +14,51 @@ class CadastroScreen extends StatefulWidget {
 }
 
 class _CadastroScreenState extends State<CadastroScreen> {
-  
+  //Integração -------------------------------------------------------------------------------------------------------
+
+  final TextEditingController _controllerName = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerSex = TextEditingController();
+
+  void cadastrarUsuario(
+      String name, String email, String password, String sexo) async {
+    // URL do backend
+    var url = 'http://localhost:9300/create';
+    try {
+      // Fazendo a requisição HTTP POST para o backend
+      var response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          "name": name,
+          "email": password,
+          "sexo": sexo,
+          "password": email,
+          "entes_queridos": [{}],
+          "remedios": [{}],
+          "atividade_fisicas": [{}],
+          "alimentacao": [{}],
+          "alarmes": [{}],
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // Cadastro bem-sucedido
+        print('Usuário cadastrado com sucesso!');
+      } else {
+        // Ocorreu algum erro no cadastro
+        print(
+            'Erro no cadastro do usuário. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Ocorreu algum erro de conexão
+      print('Erro de conexão: $e');
+    }
+  }
+
+  //Widgets ----------------------------------------------------------------------------------------------------------
+
   Widget _buildImage() {
     return Container(
       height: 280.0,
@@ -37,13 +84,14 @@ class _CadastroScreenState extends State<CadastroScreen> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
+          child: TextField(
+            controller: _controllerName,
             keyboardType: TextInputType.name,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -69,13 +117,14 @@ class _CadastroScreenState extends State<CadastroScreen> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
+          child: TextField(
+            controller: _controllerSex,
             keyboardType: TextInputType.text,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -101,13 +150,14 @@ class _CadastroScreenState extends State<CadastroScreen> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
+          child: TextField(
+            controller: _controllerEmail,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -133,13 +183,14 @@ class _CadastroScreenState extends State<CadastroScreen> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
+          child: TextField(
+            controller: _controllerPassword,
             obscureText: true,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -162,7 +213,11 @@ class _CadastroScreenState extends State<CadastroScreen> {
       height: 50.0,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/options_list');
+          String username = _controllerName.text;
+          String password = _controllerPassword.text;
+          String email = _controllerEmail.text;
+          String sexo = _controllerSex.text;
+          cadastrarUsuario(username, password, email, sexo);
         },
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

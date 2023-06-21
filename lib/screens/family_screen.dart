@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:http/http.dart' as http;
+
 
 List _dataDummyFamily = [
   {
@@ -39,6 +43,36 @@ List _dataDummyFamily = [
     "group": "r"
   },
 ];
+
+void cadastrarEnte(String nome, String telefone, String parentesco, String descricao) async {
+  // URL do backend
+    var url = 'http://localhost:7000/create';
+    try {
+      // Fazendo a requisição HTTP POST para o backend
+      var response = await http.post(
+        Uri.parse(url),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'nome': nome,
+          'telefone': telefone,
+          'parentesco': parentesco,
+          'descricao': descricao
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // Cadastro bem-sucedido
+        print('Familiar cadastrado com sucesso!');
+      } else {
+        // Ocorreu algum erro no cadastro
+        print(
+            'Erro no cadastro do usuário. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Ocorreu algum erro de conexão
+      print('Erro de conexão: $e');
+    }
+}
 
 class GroupListFamily extends StatefulWidget {
   @override
