@@ -7,23 +7,33 @@ import 'package:http/http.dart' as http;
 
 List _dataDummyMedicine = [
   {
-    "albumId": 1,
-    "id": 1,
-    "title": "Paracetamol",
-    "thumbnailUrl": "assets/icons/vitamina.png",
-    "tipo": "Remédio",
-    "data": "08/04/23",
-    "group": "d"
-  },
-  {
-    "albumId": 1,
-    "id": 2,
-    "title": "Dipirona",
-    "thumbnailUrl": "assets/icons/vitaminas.png",
-    "tipo": "Anti-Inflamatório",
-    "data": "09/04/23",
-    "group": "a"
-  },
+    "_id": "64923b0bcdf7e242b9978130",
+    "remedios": [
+      {
+        "id": "64924afab977b3fbeccb51a4",
+        "data": {
+          "nomeRemedio": "remedio",
+          "descricaoRemedio": "um remedio",
+          "dataHora": {
+            "tipo": "Remedio",
+            "data": null,
+            "dias": [
+              {"domingo": false},
+              {"segunda": false},
+              {"terça": false},
+              {"quarta": false},
+              {"quinta": false},
+              {"sexta": false},
+              {"sabado": false}
+            ],
+            "vibrar": false,
+            "repetir": true
+          },
+          "thumbnailUrl": "assets/icons/vitaminas.png"
+        }
+      }
+    ]
+  }
 ];
 
 class GroupListMedicine extends StatefulWidget {
@@ -81,23 +91,55 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
   final FloatingActionButtonLocation _fabLocation =
       FloatingActionButtonLocation.centerDocked;
 
-  Future<void> obterLista() async {
-    var url = 'http://localhost:4000/getAllRemedy';
+  List<dynamic> _medicines = [];
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    obterLista();
+  }
+
+  String fixJsonStructure(String jsonString) {
+    // Adiciona aspas duplas nas chaves
+    jsonString = jsonString.replaceAll(RegExp(r'(\w+):'), '"\$1":');
+
+    // Adiciona aspas duplas nos valores
+    jsonString = jsonString.replaceAll(RegExp(r': (\w+)'), ': "\$1"');
+
+    // Retorna o JSON corrigido
+    return jsonString;
+  }
+
+  Future<void> obterLista() async {
+    var url = 'http://localhost:8100/remedy/listAll';
+    print('Chegou até aqui');
     try {
-      //var prefs = await SharedPreferences.getInstance();
-      //var token = prefs.getString('token');
-      var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODczMDQ5ODYsInVzZXJJRCI6Ik9iamVjdElkKFwiNjQ5MjNiMGJjZGY3ZTI0MmI5OTc4MTMwXCIpIn0.Okc_W9jSA9aH_-b42DS37ourvg-0f8WgiFbupb2eYds';
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      //String? token = prefs.getString('token');
+      var token =
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODczODgzNDAsInVzZXJJRCI6Ik9iamVjdElkKFwiNjQ5MjNiMGJjZGY3ZTI0MmI5OTc4MTMwXCIpIn0.hNbHD9NSaS_n_1d-bht_kvr_YNXG4cgYLdIi-dyGSGk';
 
       if (token != null) {
         var response = await http.get(Uri.parse(url), headers: {
           'Authorization': 'Bearer $token',
         });
-
+        print('Response: $response');
         if (response.statusCode == 200) {
           // Lista obtida com sucesso
-          var lista = jsonDecode(response.body);
-          print('Lista: $lista');
+          var jsonString = fixJsonStructure(response.body);
+          var data = jsonDecode(jsonString);
+          print('JS:' + jsonString);
+          print(data);
+          var remedios = data['remedios'][0];
+          print('remedios' + remedios);
+          if (remedios != null && remedios is List) {
+            var primeiraMedicina = remedios[0];
+            var dataMedicina = primeiraMedicina['data'];
+            print('primeira medicina: '+primeiraMedicina);
+            print('data medicina: '+dataMedicina);
+          }
+
+          print(_medicines);
         } else {
           // Falha ao obter a lista
           print('Falha ao obter a lista. Status code: ${response.statusCode}');
@@ -105,6 +147,7 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
       } else {
         // Token não encontrado, o usuário não está autenticado
         print('Usuário não autenticado. Faça o login primeiro.');
+        //Navigator.of(context).pushNamed('/login_screen');
       }
     } catch (e) {
       // Erro de conexão
@@ -184,9 +227,8 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
                 ))),
       ),
       body: GroupedListView<dynamic, String>(
-        elements:
-            _dataDummyMedicine, //Banco de Dados --------------------------
-        groupBy: (element) => element['tipo'],
+        elements: _medicines, //Banco de Dados --------------------------
+        groupBy: (element) => element['nomeRemedio'],
         groupSeparatorBuilder: (String groupByValue) => Padding(
           padding: const EdgeInsets.all(10),
           child: Row(
@@ -211,7 +253,7 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
             ],
           ),
         ),
-        itemBuilder: (context, dynamic element) {
+        itemBuilder: (context, element) {
           return Card(
             elevation: 10,
             margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
@@ -261,7 +303,7 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
                             child: Text(
-                              element['title'],
+                              element['nomeRemedio'],
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -281,10 +323,10 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
                                 const Icon(Icons.calendar_today,
                                     color: Color.fromARGB(255, 255, 255, 255),
                                     size: 16),
-                                Container(
-                                  margin: const EdgeInsets.only(left: 10),
-                                  child: Text('${element['data']}'),
-                                )
+                                // Container(
+                                //   margin: const EdgeInsets.only(left: 10),
+                                //   child: Text('${element['dataHora']}'),
+                                // )
                               ],
                             ),
                           )
@@ -333,7 +375,7 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
           );
         },
         itemComparator: (item1, item2) =>
-            item1['title'].compareTo(item2['title']), // optional
+            item1['nomeRemedio'].compareTo(item2['nomeRemedio']), // optional
         useStickyGroupSeparators: true, // optional
         floatingHeader: true, // optional
         order: GroupedListOrder.ASC, // optional
@@ -342,6 +384,7 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/add_medicine');
+                obterLista();
               },
               tooltip: 'Criar',
               child: const Icon(Icons.add),

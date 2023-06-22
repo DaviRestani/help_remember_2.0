@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:help_remember/utilities/constants.dart';
 
@@ -24,6 +25,56 @@ class _AddDietaState extends State<AddDieta> {
   bool enabled_sex = false;
   bool enabled_sab = false;
 
+  final TextEditingController _nomeComida = TextEditingController();
+  final TextEditingController _descricaComida = TextEditingController();
+  final TextEditingController _descricaComida2 = TextEditingController();
+  final TextEditingController _descricaComida3 = TextEditingController();
+
+  void criarComida(String nomeComida, String descricaComida,
+      String descricaComida2, String descricaComida3) async {
+    Map<String, dynamic> requestBody = {
+      'nomeComida': nomeComida,
+      'descricaComidaManha': descricaComida,
+      'descricaComidaTarde': descricaComida2,
+      'descricaComidaNoite': descricaComida3,
+    };
+
+    String token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODczMDY0MzgsInVzZXJJRCI6Ik9iamVjdElkKFwiNjQ5MjNiMGJjZGY3ZTI0MmI5OTc4MTMwXCIpIn0.Y0BZuCCoJI-7iE-23Lub0VDOlyrwrH34qGs7q_boNps'; // Converte o corpo da requisição em uma string JSON
+    String requestBodyJson = jsonEncode(requestBody);
+    print(token);
+
+    print(requestBody);
+    // URL do endpoint do backend
+    String url = 'http://localhost:8100/food/create/<user>';
+
+    // Cabeçalho da requisição com o token de autenticação
+    Map<String, String> headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+
+    print(headers);
+    // Envia a solicitação POST para o backend
+    http.Response response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: requestBodyJson,
+    );
+
+    // Verifica o código de resposta do servidor
+    if (response.statusCode == 200) {
+      // O remédio foi adicionado com sucesso
+      // Faça algo aqui, como mostrar uma mensagem de sucesso ou redirecionar para outra tela
+      print('Dieta adicionado');
+      Navigator.of(context).pop();
+    } else {
+      // Houve um erro ao adicionar o remédio
+      // Exiba uma mensagem de erro ou faça algo apropriado com base na resposta do servidor
+      print('Falha ao adicionar o dieta. Status code: ${response.statusCode}');
+    }
+  }
+
   Widget _buildNameTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,13 +85,14 @@ class _AddDietaState extends State<AddDieta> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
+          child: TextField(
+            controller: _nomeComida,
             keyboardType: TextInputType.name,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -78,14 +130,99 @@ class _AddDietaState extends State<AddDieta> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 80.0,
-          child: const TextField(
+          child: TextField(
+            controller: _descricaComida,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              hintText: '   Adicionar Descrição ...',
+              hintStyle: kHintTextStyleCadastro,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPasswordTF2(String estado) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        //SizedBox(height: 10.0),
+        SizedBox(
+          width: 390.0,
+          child: Text(estado,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 0, 7, 71),
+                //backgroundColor: Color(0xff1b2c57)
+              )),
+        ),
+        Container(
+          padding: const EdgeInsets.only(left: 20),
+          alignment: Alignment.topLeft,
+          decoration: kBoxDecorationStyleCadastro,
+          width: 390.0,
+          height: 80.0,
+          child: TextField(
+            controller: _descricaComida2,
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            style: const TextStyle(
+              color: Color.fromARGB(255, 0, 0, 0),
+              fontFamily: 'Inknut Antiqua',
+            ),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              hintText: '   Adicionar Descrição ...',
+              hintStyle: kHintTextStyleCadastro,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPasswordTF3(String estado) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        //SizedBox(height: 10.0),
+        SizedBox(
+          width: 390.0,
+          child: Text(estado,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 0, 7, 71),
+                //backgroundColor: Color(0xff1b2c57)
+              )),
+        ),
+        Container(
+          padding: const EdgeInsets.only(left: 20),
+          alignment: Alignment.topLeft,
+          decoration: kBoxDecorationStyleCadastro,
+          width: 390.0,
+          height: 80.0,
+          child: TextField(
+            controller: _descricaComida3,
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            style: const TextStyle(
+              color: Color.fromARGB(255, 0, 0, 0),
+              fontFamily: 'Inknut Antiqua',
+            ),
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               hintText: '   Adicionar Descrição ...',
@@ -343,11 +480,11 @@ class _AddDietaState extends State<AddDieta> {
                     const SizedBox(
                       width: 12,
                     ),
-                    _buildPasswordTF('Tarde'),
+                    _buildPasswordTF2('Tarde'),
                     const SizedBox(
                       width: 12,
                     ),
-                    _buildPasswordTF('Noite'),
+                    _buildPasswordTF3('Noite'),
                   ],
                 ),
               ),
@@ -355,7 +492,19 @@ class _AddDietaState extends State<AddDieta> {
                 height: 15.0,
               ),
               ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    String nomeComida = _nomeComida
+                        .text; // Obtenha o nome do remédio do campo de entrada
+                    String descricaoComida = _descricaComida
+                        .text; // Obtenha a descrição do remédio do campo de entrada
+                    String descricaoComida2 = _descricaComida2.text;
+                    String descricaoComida3 = _descricaComida3.text;
+                    print(descricaoComida);
+                    print(descricaoComida2);
+                    print(descricaoComida3);
+                    criarComida(nomeComida, descricaoComida, descricaoComida2,
+                        descricaoComida3);
+                  },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(

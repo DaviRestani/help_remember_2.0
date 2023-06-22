@@ -1,5 +1,6 @@
 // ignore_for_file: unused_element
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:help_remember/utilities/constants.dart';
@@ -12,6 +13,51 @@ class AddDiary extends StatefulWidget {
 }
 
 class _AddDiaryState extends State<AddDiary> {
+  final TextEditingController _nome = TextEditingController();
+  final TextEditingController _descricao = TextEditingController();
+
+  void criarDiario(String nome, String descricao) async {
+    Map<String, dynamic> requestBody = {
+      'nomeDiario': nome,
+      'descricao': descricao,
+    };
+
+    String token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODczMDY0MzgsInVzZXJJRCI6Ik9iamVjdElkKFwiNjQ5MjNiMGJjZGY3ZTI0MmI5OTc4MTMwXCIpIn0.Y0BZuCCoJI-7iE-23Lub0VDOlyrwrH34qGs7q_boNps'; // Converte o corpo da requisição em uma string JSON
+    String requestBodyJson = jsonEncode(requestBody);
+    print(token);
+
+    print(requestBody);
+    // URL do endpoint do backend
+    String url = 'http://localhost:8100/diary/create/<user>';
+
+    // Cabeçalho da requisição com o token de autenticação
+    Map<String, String> headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+
+    print(headers);
+    // Envia a solicitação POST para o backend
+    http.Response response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: requestBodyJson,
+    );
+
+    // Verifica o código de resposta do servidor
+    if (response.statusCode == 200) {
+      // O remédio foi adicionado com sucesso
+      // Faça algo aqui, como mostrar uma mensagem de sucesso ou redirecionar para outra tela
+      print('Diário adicionado');
+      Navigator.of(context).pop();
+    } else {
+      // Houve um erro ao adicionar o remédio
+      // Exiba uma mensagem de erro ou faça algo apropriado com base na resposta do servidor
+      print('Falha ao adicionar o diário. Status code: ${response.statusCode}');
+    }
+  }
+
   Widget _buildNameTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +68,8 @@ class _AddDiaryState extends State<AddDiary> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
+          child: TextField(
+            controller: _nome,
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
@@ -35,7 +82,7 @@ class _AddDiaryState extends State<AddDiary> {
                 Icons.medical_services_outlined,
                 color: Color.fromARGB(255, 0, 0, 0),
               ),
-              hintText: 'Nome do Remédio',
+              hintText: 'Diário do dia',
               hintStyle: kHintTextStyleCadastro,
             ),
           ),
@@ -70,7 +117,8 @@ class _AddDiaryState extends State<AddDiary> {
           decoration: kBoxDecorationStyleText2,
           width: 410.0,
           height: 380.0,
-          child: const TextField(
+          child: TextField(
+            controller: _descricao,
             keyboardType: TextInputType.multiline,
             maxLines: null,
             style: TextStyle(
@@ -155,7 +203,11 @@ class _AddDiaryState extends State<AddDiary> {
                         width: 150, // <-- Your width
                         height: 40,
                         child: ElevatedButton(
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: () {
+                              String nome = _nome.text;
+                              String descricao = _descricao.text;
+                              criarDiario(nome, descricao);
+                            },
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(

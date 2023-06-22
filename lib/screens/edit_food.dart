@@ -207,7 +207,13 @@ class _GroupListState extends State<GroupList> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         //backgroundColor: Colors.transparent,
         elevation: 0,
       ),

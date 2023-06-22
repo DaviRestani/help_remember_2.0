@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import '../utilities/constants.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class FamilyCadastroScreen extends StatefulWidget {
   @override
@@ -25,6 +27,56 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
 
   bool _rememberMe = false;
 
+  final TextEditingController _nome = TextEditingController();
+  final TextEditingController _contato = TextEditingController();
+  final TextEditingController _parentesco = TextEditingController();
+  final TextEditingController _descricao = TextEditingController();
+
+  void criarPessoa(
+      String nome, String contato, String parentesco, String descricao) async {
+    Map<String, dynamic> requestBody = {
+      'nome': nome,
+      'contato': contato,
+      'parentesco': parentesco,
+      'descricao': descricao
+    };
+
+    String token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODczMDY0MzgsInVzZXJJRCI6Ik9iamVjdElkKFwiNjQ5MjNiMGJjZGY3ZTI0MmI5OTc4MTMwXCIpIn0.Y0BZuCCoJI-7iE-23Lub0VDOlyrwrH34qGs7q_boNps'; // Converte o corpo da requisição em uma string JSON
+    String requestBodyJson = jsonEncode(requestBody);
+    print(token);
+
+    print(requestBody);
+    // URL do endpoint do backend
+    String url = 'http://localhost:8100/friend/create/<user>';
+
+    // Cabeçalho da requisição com o token de autenticação
+    Map<String, String> headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+
+    print(headers);
+    // Envia a solicitação POST para o backend
+    http.Response response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: requestBodyJson,
+    );
+
+    // Verifica o código de resposta do servidor
+    if (response.statusCode == 200) {
+      // O remédio foi adicionado com sucesso
+      // Faça algo aqui, como mostrar uma mensagem de sucesso ou redirecionar para outra tela
+      print('Ente adicionado');
+      Navigator.of(context).pop();
+    } else {
+      // Houve um erro ao adicionar o remédio
+      // Exiba uma mensagem de erro ou faça algo apropriado com base na resposta do servidor
+      print('Falha ao adicionar o ente. Status code: ${response.statusCode}');
+    }
+  }
+
   Widget _buildNameTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,12 +88,13 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
           width: 390.0,
           height: 40.0,
           child: TextField(
+            controller: _nome,
             keyboardType: TextInputType.name,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -68,12 +121,13 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
           width: 390.0,
           height: 40.0,
           child: TextField(
+            controller: _contato,
             keyboardType: TextInputType.text,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -100,12 +154,13 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
           width: 390.0,
           height: 40.0,
           child: TextField(
+            controller: _parentesco,
             keyboardType: TextInputType.text,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -127,19 +182,20 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
       children: <Widget>[
         //SizedBox(height: 10.0),
         Container(
-          padding: EdgeInsets.only(left: 20),
+          padding: const EdgeInsets.only(left: 20),
           alignment: Alignment.topLeft,
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 200.0,
           child: TextField(
+            controller: _descricao,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               hintText: '   Adicionar Descrição ...',
@@ -185,8 +241,16 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
       width: 250.0,
       height: 50.0,
       child: ElevatedButton(
-        onPressed: () => print('Botão Logar'),
-        child: Text(
+        onPressed: () {
+          String nome =
+              _nome.text; // Obtenha o nome do remédio do campo de entrada
+          String contato = _contato
+              .text; // Obtenha a descrição do remédio do campo de entrada
+          String parentesco = _parentesco.text;
+          String descricao = _descricao.text;
+          criarPessoa(nome, contato, parentesco, descricao);
+        },
+        child: const Text(
           'REGISTRAR',
           style: TextStyle(
             color: Colors.white,
@@ -201,7 +265,7 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0))),
           backgroundColor: MaterialStateProperty.all<Color>(
-            Color(0xFF398AE5),
+            const Color(0xFF398AE5),
           ),
         ),
       ),
@@ -215,7 +279,7 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
         title: new Center(
             child: new Text("Adicionar Ente",
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Inknut Antiqua',
@@ -237,7 +301,7 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -254,8 +318,8 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
               Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 70.0,
                     //vertical: 20.0,
                   ),
@@ -263,19 +327,19 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       //_buildImage(),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       _buildNameTF(),
-                      SizedBox(
+                      const SizedBox(
                         height: 5.0,
                       ),
                       _buildSexTF(),
-                      SizedBox(height: 5.0),
+                      const SizedBox(height: 5.0),
                       _buildEmailTF(),
-                      SizedBox(height: 5.0),
+                      const SizedBox(height: 5.0),
                       _buildPasswordTF(),
                       //SizedBox(height: 5.0),
                       //_buildImagePicker(),
-                      SizedBox(height: 15.0),
+                      const SizedBox(height: 15.0),
                       _buildLoginBtn(),
                     ],
                   ),

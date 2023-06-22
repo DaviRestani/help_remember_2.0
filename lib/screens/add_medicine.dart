@@ -45,7 +45,7 @@ class _AddRemedioState extends State<AddRemedio> {
 
     print(requestBody);
     // URL do endpoint do backend
-    String url = 'http://localhost:9300/createRemedy';
+    String url = 'http://localhost:8100/createRemedy';
 
     // Cabeçalho da requisição com o token de autenticação
     Map<String, String> headers = {

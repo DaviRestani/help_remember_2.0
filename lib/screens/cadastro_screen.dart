@@ -24,7 +24,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
   void cadastrarUsuario(
       String name, String email, String password, String sexo) async {
     // URL do backend
-    var url = 'http://localhost:9300/create';
+    var url = 'http://localhost:8100/create';
     try {
       // Fazendo a requisição HTTP POST para o backend
       var response = await http.post(

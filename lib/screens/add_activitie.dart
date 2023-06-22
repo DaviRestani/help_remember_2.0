@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, library_private_types_in_public_api
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:help_remember/utilities/constants.dart';
@@ -25,6 +26,52 @@ class _AddAtividadeState extends State<AddAtividade> {
   bool enabled_sex = false;
   bool enabled_sab = false;
 
+  final TextEditingController _nome = TextEditingController();
+  final TextEditingController _descricao = TextEditingController();
+
+  void criarAtividade(String nome, String descricao) async {
+    Map<String, dynamic> requestBody = {
+      'nomeAtividade': nome,
+      'descricaoAtividade': descricao,
+    };
+
+    String token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODczMDY0MzgsInVzZXJJRCI6Ik9iamVjdElkKFwiNjQ5MjNiMGJjZGY3ZTI0MmI5OTc4MTMwXCIpIn0.Y0BZuCCoJI-7iE-23Lub0VDOlyrwrH34qGs7q_boNps'; // Converte o corpo da requisição em uma string JSON
+    String requestBodyJson = jsonEncode(requestBody);
+    print(token);
+
+    print(requestBody);
+    // URL do endpoint do backend
+    String url = 'http://localhost:8100/activity/create/<user>';
+
+    // Cabeçalho da requisição com o token de autenticação
+    Map<String, String> headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+
+    print(headers);
+    // Envia a solicitação POST para o backend
+    http.Response response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: requestBodyJson,
+    );
+
+    // Verifica o código de resposta do servidor
+    if (response.statusCode == 200) {
+      // O remédio foi adicionado com sucesso
+      // Faça algo aqui, como mostrar uma mensagem de sucesso ou redirecionar para outra tela
+      print('Atividade adicionada');
+      Navigator.of(context).pop();
+    } else {
+      // Houve um erro ao adicionar o remédio
+      // Exiba uma mensagem de erro ou faça algo apropriado com base na resposta do servidor
+      print(
+          'Falha ao adicionar o atividade. Status code: ${response.statusCode}');
+    }
+  }
+
   Widget _buildNameTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +82,8 @@ class _AddAtividadeState extends State<AddAtividade> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 40.0,
-          child: const TextField(
+          child: TextField(
+            controller: _nome,
             keyboardType: TextInputType.name,
             style: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
@@ -68,7 +116,8 @@ class _AddAtividadeState extends State<AddAtividade> {
           decoration: kBoxDecorationStyleCadastro,
           width: 390.0,
           height: 100.0,
-          child: const TextField(
+          child: TextField(
+            controller: _descricao,
             keyboardType: TextInputType.multiline,
             maxLines: null,
             style: TextStyle(
@@ -533,7 +582,11 @@ class _AddAtividadeState extends State<AddAtividade> {
                 height: 15.0,
               ),
               ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    String nome = _nome.text;
+                    String descricao = _descricao.text;
+                    criarAtividade(nome, descricao);
+                  },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(

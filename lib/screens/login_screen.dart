@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../bin/services/SharedVariablesToken.dart';
 import '../utilities/constants.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _controllerPassword = TextEditingController();
 
   void fazerLogin(String email, String password) async {
-    var url = 'http://localhost:9300/login';
+    var url = 'http://localhost:8100/login';
     try {
       var response = await http.post(
         Uri.parse(url),
@@ -35,10 +36,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // Obtenha o token do cookie de resposta
         var token = response.headers;
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        prefs.setString('token', token as String);
         // Guarde o token localmente (exemplo: usando SharedPreferences)
         //var prefs = await SharedPreferences.getInstance();
         //prefs.setString('token', token!);
         //SharedVariables.token = token as String;
+        Navigator.of(context).pop();
       } else {
         // Falha no login
         print('Falha no login. Status code: ${response.statusCode}');
@@ -155,9 +160,9 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           String password = _controllerPassword.text;
           String email = _controllerEmail.text;
-          print('VAI CURINTIA!!!!!!');
           print("Senha: ${password}");
           fazerLogin(email, password);
+          Navigator.of(context).pop();
         },
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
