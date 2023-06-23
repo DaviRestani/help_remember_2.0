@@ -71,11 +71,11 @@ class _AddDiaryState extends State<AddDiary> {
           child: TextField(
             controller: _nome,
             keyboardType: TextInputType.name,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -121,11 +121,11 @@ class _AddDiaryState extends State<AddDiary> {
             controller: _descricao,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               hintText: '   Começei o dia ...',
@@ -149,8 +149,8 @@ class _AddDiaryState extends State<AddDiary> {
           backgroundColor: Colors.blue,
           title: Center(
               child: Column(
-            children: <Widget>[
-              const Text('Adicionar uma Página ao Diário',
+            children: const <Widget>[
+              Text('Adicionar uma Página ao Diário',
                   style: TextStyle(
                       color: Color.fromARGB(255, 255, 255, 255),
                       fontSize: 25.0))
@@ -207,6 +207,7 @@ class _AddDiaryState extends State<AddDiary> {
                               String nome = _nome.text;
                               String descricao = _descricao.text;
                               criarDiario(nome, descricao);
+                              Navigator.of(context).pop();
                             },
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<
@@ -243,7 +244,7 @@ class _AddDiaryState extends State<AddDiary> {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[],
+            children: const <Widget>[],
           ),
         ),
       ),

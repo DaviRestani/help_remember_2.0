@@ -13,7 +13,7 @@ class AddAtividade extends StatefulWidget {
 }
 
 class _AddAtividadeState extends State<AddAtividade> {
-  TimeOfDay _selectedTime = const TimeOfDay(hour: 12, minute: 30);
+  TimeOfDay _selectedTime = const TimeOfDay(hour: 10, minute: 00);
   ValueChanged<TimeOfDay>? selectTime;
 
   DateTime? _dateTime;
@@ -85,11 +85,11 @@ class _AddAtividadeState extends State<AddAtividade> {
           child: TextField(
             controller: _nome,
             keyboardType: TextInputType.name,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -120,11 +120,11 @@ class _AddAtividadeState extends State<AddAtividade> {
             controller: _descricao,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: 'Inknut Antiqua',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               hintText: '   Adicionar Descrição ...',
@@ -190,7 +190,7 @@ class _AddAtividadeState extends State<AddAtividade> {
               ),
               GestureDetector(
                 child: Text(
-                    _dateTime == null ? '2023-01-01' : _dateTime.toString(),
+                    _dateTime == null ? '2023-06-23' : _dateTime.toString(),
                     style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
@@ -317,216 +317,6 @@ class _AddAtividadeState extends State<AddAtividade> {
                   ],
                 ),
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: <Widget>[
-              //     Container(
-              //       width: 65.0,
-              //       height: 50.0,
-              //       decoration: BoxDecoration(
-              //           color: (enabled_dom) ? Colors.red : Colors.red,
-              //           borderRadius: BorderRadiusDirectional.circular(100.0)),
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(3.0),
-              //         child: ElevatedButton(
-              //           onPressed: () =>
-              //               setState(() => enabled_dom = !enabled_dom),
-              //           style: ElevatedButton.styleFrom(
-              //             backgroundColor: enabled_dom
-              //                 ? Colors.white
-              //                 : const Color(
-              //                     0xff1b2c57), // This is what you need!
-              //           ),
-              //           child: const Text(
-              //             'Dom',
-              //             style: TextStyle(
-              //                 fontWeight: FontWeight.bold, fontSize: 12.0),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       width: 65.0,
-              //       height: 50.0,
-              //       //decoration: BoxDecoration(
-              //       //    color:
-              //       //        (enabled_seg) ? Colors.black : Colors.transparent,
-              //       //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(3.0),
-              //         child: ElevatedButton(
-              //           onPressed: () =>
-              //               setState(() => enabled_seg = !enabled_seg),
-              //           style: ElevatedButton.styleFrom(
-              //             backgroundColor: enabled_seg
-              //                 ? Colors.white
-              //                 : const Color(0xff1b2c57),
-              //             foregroundColor: enabled_seg
-              //                 ? const Color(0xff1b2c57)
-              //                 : Colors
-              //                     .white, // This is what you need! // This is what you need!
-              //           ),
-              //           child: const Text(
-              //             'Seg',
-              //             style: TextStyle(
-              //                 fontWeight: FontWeight.bold, fontSize: 12.0),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       width: 65.0,
-              //       height: 50.0,
-              //       //decoration: BoxDecoration(
-              //       //    color:
-              //       //        (enabled_ter) ? Colors.black : Colors.transparent,
-              //       //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(3.0),
-              //         child: ElevatedButton(
-              //           onPressed: () =>
-              //               setState(() => enabled_ter = !enabled_ter),
-              //           style: ElevatedButton.styleFrom(
-              //             backgroundColor: enabled_ter
-              //                 ? Colors.white
-              //                 : const Color(0xff1b2c57),
-              //             foregroundColor: enabled_ter
-              //                 ? const Color(0xff1b2c57)
-              //                 : Colors
-              //                     .white, // This is what you need! // This is what you need!
-              //           ),
-              //           child: const Text(
-              //             'Ter',
-              //             style: TextStyle(
-              //                 fontWeight: FontWeight.bold, fontSize: 12.0),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       width: 65.0,
-              //       height: 50.0,
-              //       //decoration: BoxDecoration(
-              //       //    color:
-              //       //        (enabled_qua) ? Colors.black : Colors.transparent,
-              //       //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(3.0),
-              //         child: ElevatedButton(
-              //           onPressed: () =>
-              //               setState(() => enabled_qua = !enabled_qua),
-              //           style: ElevatedButton.styleFrom(
-              //             backgroundColor: enabled_qua
-              //                 ? Colors.white
-              //                 : const Color(0xff1b2c57),
-              //             foregroundColor: enabled_qua
-              //                 ? const Color(0xff1b2c57)
-              //                 : Colors
-              //                     .white, // This is what you need! // This is what you need!
-              //           ),
-              //           child: const Text(
-              //             'Qua',
-              //             style: TextStyle(
-              //                 fontWeight: FontWeight.bold, fontSize: 12.0),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       width: 65.0,
-              //       height: 50.0,
-              //       //decoration: BoxDecoration(
-              //       //    color:
-              //       //        (enabled_qui) ? Colors.black : Colors.transparent,
-              //       //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(3.0),
-              //         child: ElevatedButton(
-              //           onPressed: () =>
-              //               setState(() => enabled_qui = !enabled_qui),
-              //           style: ElevatedButton.styleFrom(
-              //             backgroundColor: enabled_qui
-              //                 ? Colors.white
-              //                 : const Color(0xff1b2c57),
-              //             foregroundColor: enabled_qui
-              //                 ? const Color(0xff1b2c57)
-              //                 : Colors
-              //                     .white, // This is what you need! // This is what you need!
-              //           ),
-              //           child: const Text(
-              //             'Qui',
-              //             style: TextStyle(
-              //                 fontWeight: FontWeight.bold, fontSize: 12.0),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       width: 65.0,
-              //       height: 50.0,
-              //       //decoration: BoxDecoration(
-              //       //    color:
-              //       //        (enabled_sex) ? Colors.black : Colors.transparent,
-              //       //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(3.0),
-              //         child: ElevatedButton(
-              //           onPressed: () =>
-              //               setState(() => enabled_sex = !enabled_sex),
-              //           style: ElevatedButton.styleFrom(
-              //             backgroundColor: enabled_sex
-              //                 ? Colors.white
-              //                 : const Color(0xff1b2c57),
-              //             foregroundColor: enabled_sex
-              //                 ? const Color(0xff1b2c57)
-              //                 : Colors
-              //                     .white, // This is what you need! // This is what you need!
-              //           ),
-              //           child: const Text(
-              //             'Sex',
-              //             style: TextStyle(
-              //                 fontWeight: FontWeight.bold, fontSize: 12.0),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       width: 65.0,
-              //       height: 50.0,
-              //       //decoration: BoxDecoration(
-              //       //    color:
-              //       //        (enabled_sab) ? Colors.black : Colors.transparent,
-              //       //    borderRadius: BorderRadiusDirectional.circular(100.0)),
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(3.0),
-              //         child: ElevatedButton(
-              //           onPressed: () =>
-              //               setState(() => enabled_sab = !enabled_sab),
-              //           style: ElevatedButton.styleFrom(
-              //             backgroundColor: enabled_sab
-              //                 ? Colors.white
-              //                 : const Color(0xff1b2c57),
-              //             foregroundColor: enabled_sab
-              //                 ? const Color(0xff1b2c57)
-              //                 : Colors.white, // This is what you need!
-              //           ),
-              //           child: const Text(
-              //             'Sab',
-              //             style: TextStyle(
-              //                 fontWeight: FontWeight.bold, fontSize: 12.0),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     //circleDay('Dom', context, true),
-              //     //circleDay('Seg', context, false),
-              //     //circleDay('Ter', context, false),
-              //     //circleDay('Qua', context, false),
-              //     //circleDay('Qui', context, false),
-              //     //circleDay('Sex', context, true),
-              //     //circleDay('Sab', context, false),
-              //   ],
-              // ),
               const SizedBox(
                 height: 20.0,
               ),
@@ -586,6 +376,7 @@ class _AddAtividadeState extends State<AddAtividade> {
                     String nome = _nome.text;
                     String descricao = _descricao.text;
                     criarAtividade(nome, descricao);
+                    Navigator.of(context).pop();
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

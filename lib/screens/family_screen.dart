@@ -8,45 +8,17 @@ import 'package:http/http.dart' as http;
 List _dataDummyFamily = [
   {
     "albumId": 1,
-    "id": 1,
-    "title": "Davi Restani",
-    "thumbnailUrl": "assets/icons/pessoas.png",
-    "parente": "Amigo",
-    "data": "08/04/23",
-    "group": "d"
-  },
-  {
-    "albumId": 1,
-    "id": 2,
-    "title": "Ayslan Conti",
-    "thumbnailUrl": "assets/icons/pessoas.png",
-    "parente": "Amigo",
-    "data": "09/04/23",
-    "group": "a"
-  },
-  {
-    "albumId": 1,
     "id": 3,
-    "title": "Gabriel Cardoso",
+    "title": "Gabriel",
     "thumbnailUrl": "assets/icons/pessoas.png",
     "parente": "Amigo",
-    "data": "10/04/23",
     "group": "g"
-  },
-  {
-    "albumId": 1,
-    "id": 4,
-    "title": "Roberto Rodriguez",
-    "thumbnailUrl": "assets/icons/pessoas.png",
-    "parente": "Conhecido",
-    "data": "10/04/23",
-    "group": "r"
   },
 ];
 
 void cadastrarEnte(String nome, String telefone, String parentesco, String descricao) async {
   // URL do backend
-    var url = 'http://localhost:7000/create';
+    var url = 'http://localhost:8100/create';
     try {
       // Fazendo a requisição HTTP POST para o backend
       var response = await http.post(
@@ -311,15 +283,15 @@ class _GroupListFamilyState extends State<GroupListFamily> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.calendar_today,
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      size: 16),
-                                  Container(
-                                    margin: const EdgeInsets.only(left: 10),
-                                    child: Text('${element['data']}'),
-                                  )
-                                ],
+                                // children: [
+                                //   const Icon(Icons.calendar_today,
+                                //       color: Color.fromARGB(255, 255, 255, 255),
+                                //       size: 16),
+                                //   Container(
+                                //     margin: const EdgeInsets.only(left: 10),
+                                //     child: Text('${element['data']}'),
+                                //   )
+                                // ],
                               ),
                             )
                           ],

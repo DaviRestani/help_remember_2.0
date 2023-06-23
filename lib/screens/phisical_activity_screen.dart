@@ -9,18 +9,9 @@ List _dataDummy = [
     "id": 1,
     "title": "Treino básico",
     "thumbnailUrl": "assets/icons/esportes.png",
-    "tipo": "Tipo A",
-    "data": "08/04/23",
+    "tipo": "Atividades",
+    "data": "22/06/23",
     "group": "d"
-  },
-  {
-    "albumId": 1,
-    "id": 2,
-    "title": "Aerôbica",
-    "thumbnailUrl": "assets/icons/atividade-fisica.png",
-    "tipo": "Tipo B",
-    "data": "09/04/23",
-    "group": "a"
   },
 ];
 

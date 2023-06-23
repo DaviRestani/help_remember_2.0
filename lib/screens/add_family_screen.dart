@@ -249,6 +249,7 @@ class _FamilyCadastroScreenState extends State<FamilyCadastroScreen> {
           String parentesco = _parentesco.text;
           String descricao = _descricao.text;
           criarPessoa(nome, contato, parentesco, descricao);
+          Navigator.of(context).pop();
         },
         child: const Text(
           'REGISTRAR',

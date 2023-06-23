@@ -13,7 +13,7 @@ class AddRemedio extends StatefulWidget {
 }
 
 class _AddRemedioState extends State<AddRemedio> {
-  TimeOfDay _selectedTime = const TimeOfDay(hour: 12, minute: 30);
+  TimeOfDay _selectedTime = const TimeOfDay(hour: 10, minute: 00);
   ValueChanged<TimeOfDay>? selectTime;
 
   DateTime? _dateTime;
@@ -193,7 +193,7 @@ class _AddRemedioState extends State<AddRemedio> {
               ),
               GestureDetector(
                 child: Text(
-                    _dateTime == null ? '2023-01-01' : _dateTime.toString(),
+                    _dateTime == null ? '2023-06-22' : _dateTime.toString(),
                     style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
@@ -403,6 +403,7 @@ class _AddRemedioState extends State<AddRemedio> {
 
                     criarRemedio(
                         nomeRemedio, descricaoRemedio, dataHora, dataS);
+                    Navigator.of(context).pop();
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

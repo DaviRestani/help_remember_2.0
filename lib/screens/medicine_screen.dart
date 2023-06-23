@@ -7,33 +7,14 @@ import 'package:http/http.dart' as http;
 
 List _dataDummyMedicine = [
   {
-    "_id": "64923b0bcdf7e242b9978130",
-    "remedios": [
-      {
-        "id": "64924afab977b3fbeccb51a4",
-        "data": {
-          "nomeRemedio": "remedio",
-          "descricaoRemedio": "um remedio",
-          "dataHora": {
-            "tipo": "Remedio",
-            "data": null,
-            "dias": [
-              {"domingo": false},
-              {"segunda": false},
-              {"terça": false},
-              {"quarta": false},
-              {"quinta": false},
-              {"sexta": false},
-              {"sabado": false}
-            ],
-            "vibrar": false,
-            "repetir": true
-          },
-          "thumbnailUrl": "assets/icons/vitaminas.png"
-        }
-      }
-    ]
-  }
+    "albumId": 1,
+    "id": 1,
+    "title": "Paracetamol",
+    "thumbnailUrl": "assets/icons/vitamina.png",
+    "tipo": "Remédio",
+    "data": "24/06/23",
+    "group": "d"
+  },
 ];
 
 class GroupListMedicine extends StatefulWidget {
@@ -127,19 +108,12 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
         if (response.statusCode == 200) {
           // Lista obtida com sucesso
           var jsonString = fixJsonStructure(response.body);
-          var data = jsonDecode(jsonString);
-          print('JS:' + jsonString);
-          print(data);
-          var remedios = data['remedios'][0];
-          print('remedios' + remedios);
-          if (remedios != null && remedios is List) {
-            var primeiraMedicina = remedios[0];
-            var dataMedicina = primeiraMedicina['data'];
-            print('primeira medicina: '+primeiraMedicina);
-            print('data medicina: '+dataMedicina);
-          }
+          final data = jsonEncode(jsonString);
 
-          print(_medicines);
+          final data2 = jsonDecode(data);
+
+          final data3 = jsonDecode(data2);
+          _medicines = data3['remedios'];
         } else {
           // Falha ao obter a lista
           print('Falha ao obter a lista. Status code: ${response.statusCode}');
@@ -227,8 +201,8 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
                 ))),
       ),
       body: GroupedListView<dynamic, String>(
-        elements: _medicines, //Banco de Dados --------------------------
-        groupBy: (element) => element['nomeRemedio'],
+        elements: _dataDummyMedicine, //Banco de Dados --------------------------
+        groupBy: (element) => element['title'],
         groupSeparatorBuilder: (String groupByValue) => Padding(
           padding: const EdgeInsets.all(10),
           child: Row(
@@ -286,7 +260,7 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
                         borderRadius: BorderRadius.circular(50.0),
                         child: Image(
                           //width: 140.0,
-                          image: new AssetImage(element['thumbnailUrl']),
+                          image: AssetImage(element['thumbnailUrl']),
                           fit: BoxFit.fill,
                         ),
                       )
@@ -303,7 +277,7 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
                             child: Text(
-                              element['nomeRemedio'],
+                              element['title'],
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -319,14 +293,14 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
+                              children:  [
                                 const Icon(Icons.calendar_today,
                                     color: Color.fromARGB(255, 255, 255, 255),
                                     size: 16),
-                                // Container(
-                                //   margin: const EdgeInsets.only(left: 10),
-                                //   child: Text('${element['dataHora']}'),
-                                // )
+                                 Container(
+                                   margin: const EdgeInsets.only(left: 10),
+                                   child: Text('${element['data']}'),
+                                 )
                               ],
                             ),
                           )
@@ -375,7 +349,7 @@ class _GroupListMedicineState extends State<GroupListMedicine> {
           );
         },
         itemComparator: (item1, item2) =>
-            item1['nomeRemedio'].compareTo(item2['nomeRemedio']), // optional
+            item1['title'].compareTo(item2['title']), // optional
         useStickyGroupSeparators: true, // optional
         floatingHeader: true, // optional
         order: GroupedListOrder.ASC, // optional

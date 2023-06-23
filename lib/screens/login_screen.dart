@@ -35,14 +35,16 @@ class _LoginScreenState extends State<LoginScreen> {
         print('Login realizado com sucesso!');
 
         // Obtenha o token do cookie de resposta
-        var token = response.headers;
-        SharedPreferences prefs = await SharedPreferences.getInstance();
+        // var token = response.headers["token"];
+        // print(token);
+        //SharedPreferences prefs = await SharedPreferences.getInstance();
 
-        prefs.setString('token', token as String);
+        // prefs.setString('token', token as String);
         // Guarde o token localmente (exemplo: usando SharedPreferences)
         //var prefs = await SharedPreferences.getInstance();
         //prefs.setString('token', token!);
-        //SharedVariables.token = token as String;
+        SharedVariables.token = token as String;
+        print(SharedVariables.token);
         Navigator.of(context).pop();
       } else {
         // Falha no login
@@ -160,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           String password = _controllerPassword.text;
           String email = _controllerEmail.text;
-          print("Senha: ${password}");
+          //print("Senha: ${password}");
           fazerLogin(email, password);
           Navigator.of(context).pop();
         },

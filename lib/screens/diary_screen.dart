@@ -5,24 +5,13 @@ List _dataDummyDiary = [
   {
     "albumId": 1,
     "id": 1,
-    "title": "18 Março",
+    "title": "23 Junho",
     "thumbnailUrl": "assets/icons/esportes.png",
-    "tipo": "Março",
-    "resumo": "Trabalho",
+    "tipo": "Junho",
+    "resumo": "Exercicio",
     "data": "2023",
     "texto":
-        "A origem da palavra Filosofia é atribuída a Pitágoras, um filósofo grego, fundador da escola filosófica pitagórica, uma importante corrente da Filosofia, fortemente ligada aos números e suas relações de harmonia."
-  },
-  {
-    "albumId": 1,
-    "id": 2,
-    "title": "19 Março",
-    "thumbnailUrl": "assets/icons/atividade-fisica.png",
-    "tipo": "Março",
-    "resumo": "Promoção",
-    "data": "2023",
-    "texto":
-        "A origem da palavra Filosofia é atribuída a Pitágoras, um filósofo grego, fundador da escola filosófica pitagórica, uma importante corrente da Filosofia, fortemente ligada aos números e suas relações de harmonia."
+        "Hoje fiz uma caminhada no parque e vi umas capivaras."
   },
 ];
 

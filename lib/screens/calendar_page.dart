@@ -14,7 +14,7 @@ class _DemoAppState extends State<DemoApp> {
   final Map<DateTime, List<CleanCalendarEvent>>? events = {
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day): [
       CleanCalendarEvent(
-        'Evento A',
+        'Treino básico',
         startTime: DateTime(DateTime.now().year, DateTime.now().month,
             DateTime.now().day, 10, 0),
         endTime: DateTime(DateTime.now().year, DateTime.now().month,
@@ -26,7 +26,7 @@ class _DemoAppState extends State<DemoApp> {
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 2):
         [
       CleanCalendarEvent(
-        'Evento B',
+        'Paracetamol',
         startTime: DateTime(DateTime.now().year, DateTime.now().month,
             DateTime.now().day + 2, 10, 0),
         endTime: DateTime(DateTime.now().year, DateTime.now().month,
@@ -35,7 +35,7 @@ class _DemoAppState extends State<DemoApp> {
         color: Colors.red,
       ),
       CleanCalendarEvent(
-        'Evento C',
+        'Dieta I',
         startTime: DateTime(DateTime.now().year, DateTime.now().month,
             DateTime.now().day + 2, 14, 30),
         endTime: DateTime(DateTime.now().year, DateTime.now().month,
@@ -65,10 +65,10 @@ class _DemoAppState extends State<DemoApp> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('Calendário'),
+        title: const Text('Calendário'),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -88,12 +88,12 @@ class _DemoAppState extends State<DemoApp> {
           },
           events: events,
           isExpanded: true,
-          dayOfWeekStyle: TextStyle(
+          dayOfWeekStyle: const TextStyle(
             fontSize: 15,
             color: Colors.black12,
             fontWeight: FontWeight.w100,
           ),
-          bottomBarTextStyle: TextStyle(
+          bottomBarTextStyle: const TextStyle(
             color: Colors.black12,
           ),
           hideBottomBar: false,
@@ -103,7 +103,7 @@ class _DemoAppState extends State<DemoApp> {
       )),
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         child: Container(
           height: 20,
           child: Row(

@@ -32,7 +32,7 @@ class User {
 class UserPreferences {
   static const myUser = User(
     imagePath: 'assets/icons/suplemento.png',
-    name: "Dipirona",
+    name: "Paracetamol",
     contato: "(35)929793197",
     parente: "Amigo",
     about: "Tomar de 8h em 8h\nReceita do Dr. Cláudio\nRemédio Genérico\n",

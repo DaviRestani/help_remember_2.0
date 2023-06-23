@@ -8,17 +8,8 @@ List _dataDummy = [
     "title": "Dieta I",
     "thumbnailUrl": "assets/icons/prato.png",
     "tipo": "Tipo A",
-    "data": "08/04/23",
+    "data": "24/06/23",
     "group": "d"
-  },
-  {
-    "albumId": 1,
-    "id": 2,
-    "title": "Dieta Final de Semana",
-    "thumbnailUrl": "assets/icons/saudavel.png",
-    "tipo": "Tipo B",
-    "data": "09/04/23",
-    "group": "a"
   },
 ];
 

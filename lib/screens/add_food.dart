@@ -12,7 +12,7 @@ class AddDieta extends StatefulWidget {
 }
 
 class _AddDietaState extends State<AddDieta> {
-  TimeOfDay _selectedTime = new TimeOfDay(hour: 12, minute: 30);
+  TimeOfDay _selectedTime = new TimeOfDay(hour: 10, minute: 00);
   ValueChanged<TimeOfDay>? selectTime;
 
   DateTime? _dateTime;
@@ -290,7 +290,7 @@ class _AddDietaState extends State<AddDieta> {
               ),
               GestureDetector(
                 child: Text(
-                    _dateTime == null ? '2023-01-01' : _dateTime.toString(),
+                    _dateTime == null ? '2023-06-24' : _dateTime.toString(),
                     style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
@@ -504,6 +504,7 @@ class _AddDietaState extends State<AddDieta> {
                     print(descricaoComida3);
                     criarComida(nomeComida, descricaoComida, descricaoComida2,
                         descricaoComida3);
+                    Navigator.of(context).pop();
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(

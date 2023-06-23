@@ -32,11 +32,10 @@ class User {
 class UserPreferences {
   static const myUser = User(
     imagePath: 'assets/icons/diario.png',
-    name: "18 Março",
+    name: "22 de Junho",
     contato: "(35)929793197",
     parente: "Amigo",
-    about:
-        "A origem da palavra Filosofia é atribuída a Pitágoras, um filósofo grego, fundador da escola filosófica pitagórica, uma importante corrente da Filosofia, fortemente ligada aos números e suas relações de harmonia.",
+    about: "Hoje fiz uma caminhada no parque e vi umas capivaras"
   );
 }
 
@@ -80,7 +79,7 @@ class ProfileWidgetDiary extends StatelessWidget {
             backgroundColor: Colors.transparent,
             radius: 65,
             backgroundImage: AssetImage(imagePath),
-            child: CircleAvatar(
+            child: const CircleAvatar(
               radius: 65,
               backgroundColor: Colors.transparent,
             ),
@@ -96,7 +95,7 @@ class ProfileWidgetDiary extends StatelessWidget {
         child: buildCircle(
           color: color,
           all: 8,
-          child: Icon(
+          child: const Icon(
             Icons.edit,
             color: Colors.white,
             size: 20,
@@ -144,32 +143,32 @@ class _GroupListEditDiaryState extends State<GroupListEditDiary> {
         children: [
           Text(
             user.name,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
         ],
       );
 
   Widget buildDivider() => Container(
         margin: const EdgeInsets.only(left: 40.0, right: 40.0),
-        child: Divider(
+        child: const Divider(
           color: Colors.blue,
           height: 24,
         ),
       );
 
   Widget buildAbout(User user) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 48),
+        padding: const EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Informações",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
             const SizedBox(height: 16),
             Text(
               user.about,
-              style: TextStyle(fontSize: 16, height: 1.4),
+              style: const TextStyle(fontSize: 16, height: 1.4),
             ),
           ],
         ),
@@ -181,12 +180,17 @@ class _GroupListEditDiaryState extends State<GroupListEditDiary> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         //backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: ListView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           ProfileWidgetDiary(
             imagePath: user.imagePath,
@@ -202,7 +206,7 @@ class _GroupListEditDiaryState extends State<GroupListEditDiary> {
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         child: Container(
           height: 20,
           child: Row(
